@@ -1,5 +1,6 @@
 // Require modules
-var m = {};
+m = {};
+g = {};
 
 [
   "babel-core/register",
@@ -28,4 +29,4 @@ m.settingsConstr();
 m.classLoader();
 
 // start LessWatch
-m.classes.LessWatch && new m.classes.LessWatch();
+g.classes.LessWatch && new g.classes.LessWatch();

@@ -1,9 +1,8 @@
-// constructs m.settings object
+// constructs g.settings object
 module.exports = function() {
-  var m = this,
-      appRoot = m.path.normalize(__dirname +'/');
+  var appRoot = m.path.normalize(__dirname +'/');
   
-  m.settings = {
+  g.settings = {
     appRoot: appRoot,
     classLoader: {
       baseDir: m.path.join(appRoot,'classes/'),

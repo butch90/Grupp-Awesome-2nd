@@ -1,7 +1,6 @@
 // gulp tasks for LESS compilation
 module.exports = function() {
-  var m = this,
-      s = this.settings,
+  var s = g.settings,
       once = true;
 
   return class LessWatch {
