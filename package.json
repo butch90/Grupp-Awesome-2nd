@@ -1,0 +1,27 @@
+{
+  "name": "SUW15dev",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "debug": "*",
+    "express": "*",
+    "compression": "*",
+    "serve-favicon": "*",
+    "marked": "*",
+    "gulp": "*",
+    "gulp-less": "*",
+    "gulp-clean-css": "*",
+    "babel-core": "*",
+    "babel-polyfill": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-0": "*",
+    "babel-register": "*"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  }
+}
