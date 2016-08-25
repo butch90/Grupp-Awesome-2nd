@@ -1,7 +1,8 @@
-// Require modules
+// globals
 m = {};
 g = {};
 
+// Require modules
 [
   "babel-core/register",
   "babel-polyfill",
