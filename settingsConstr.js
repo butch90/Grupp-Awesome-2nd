@@ -8,17 +8,6 @@ module.exports = function() {
     classLoader: {
       baseDir: m.path.join(appRoot,'classes/'),
       toLoad: [
-        'Server',
-        'LessWatch'
-      ]
-    },
-    Server: {
-      endpoint: '*',
-      // favicon: 'www/favicon.ico',
-      webroot: 'www',
-      indexFile: 'index.html',
-      port: 3000,
-      helpers: [ // server dependant classes
         'LessWatch'
       ]
     },

@@ -27,5 +27,5 @@ m.settingsConstr();
 // loads all classes
 m.classLoader();
 
-// start express server
-m.classes.Server && new m.classes.Server();
+// start LessWatch
+m.classes.LessWatch && new m.classes.LessWatch();
