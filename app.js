@@ -23,11 +23,11 @@ g = {};
   m[x.replace(/\W/g,'')] = require(x);
 });
 
-// constructs m.settings object
+// constructs g.settings object
 m.settingsConstr();
 
 // loads all classes
 m.classLoader();
 
 // start LessWatch
-g.classes.LessWatch && new g.classes.LessWatch();
+new g.classes.LessWatch();

@@ -8,7 +8,6 @@
     "express": "*",
     "compression": "*",
     "serve-favicon": "*",
-    "marked": "*",
     "gulp": "*",
     "gulp-less": "*",
     "gulp-clean-css": "*",
