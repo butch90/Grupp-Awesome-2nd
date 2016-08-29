@@ -1,6 +1,6 @@
 // globals
-m = {};
-g = {};
+m = {}; // all modules
+g = {}; // all global variables (ex. settings)
 
 // Require modules
 [
@@ -19,7 +19,7 @@ g = {};
   "./settingsConstr",
   "./classLoader"
 ].forEach(function(x){
-  // store required modules in m
+  // store required modules in "m"
   m[x.replace(/\W/g,'')] = require(x);
 });
 
