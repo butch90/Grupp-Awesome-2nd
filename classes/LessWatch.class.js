@@ -1,3 +1,5 @@
+'use strict';
+
 // gulp tasks for LESS compilation
 module.exports = function() {
   var s = g.settings,
