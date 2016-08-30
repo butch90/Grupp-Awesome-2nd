@@ -4,8 +4,6 @@ g = {}; // all global variables (ex. settings)
 
 // Require modules
 [
-  "babel-core/register",
-  "babel-polyfill",
   "express",
   "compression",
   "path",
