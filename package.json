@@ -6,10 +6,6 @@
     "cookie-parser": "*",
     "debug": "*",
     "express": "*",
-    "compression": "*",
-    "serve-favicon": "*",
-    "gulp": "*",
-    "gulp-less": "*",
-    "gulp-clean-css": "*"
+    "compression": "*"
   }
 }
