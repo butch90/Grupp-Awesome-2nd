@@ -1,11 +1,13 @@
 {
-  "name": "SUW15dev",
+  "name": "Bilverkstad",
   "version": "0.0.1",
   "dependencies": {
+    "express": "*",
+    "express-session": "*",
+    "fs": "*",
     "body-parser": "*",
     "cookie-parser": "*",
-    "debug": "*",
-    "express": "*",
+    "mongoose": "*",
     "compression": "*"
   }
 }
