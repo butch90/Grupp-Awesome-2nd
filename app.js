@@ -2,9 +2,11 @@ m = {};
 
 [
   "express",
+  "compression",
   "path",
   "fs",
-  "body-parser"
+  "body-parser",
+  "mongoose"
 ].forEach(function(x){
   m[x.replace(/\W/g,'')] = require(x);
 });
