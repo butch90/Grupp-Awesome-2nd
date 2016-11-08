@@ -16,7 +16,7 @@ g = {
 };
 
 //Variabler
-var Server = require("./classes/Server.class");
-
+var Server = require("./classes/Server.class"),
+		Mongo = require("./classes/Mongo.class");
 //Start server
-var startServer = new Server();
+var startServer = new Server(Mongo);

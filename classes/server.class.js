@@ -1,6 +1,6 @@
-module.exports = class Server{
-
-	constructor(){
+module.exports = class Server {
+ 
+	constructor(Mongo){
 
 		this.app = m.express();
 
@@ -10,10 +10,18 @@ module.exports = class Server{
 
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
+		this.mongo = new Mongo(this.app);
+
 		this.setup();
 	}
 
 	setup(){
+		var me = this;
+
+		/*this.app.get('/', function(req, res){
+
+			res.sendFile(g.appRoot + g.webRoot + '/index.html');
+		});*/
 		
 		this.app.listen(g.port, function(){
 
