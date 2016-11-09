@@ -10,7 +10,7 @@ module.exports = class Server {
 
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
-		this.mongo = new Mongo(this.app);
+		new g.classes.Mongo(this.app);
 
 		this.setup();
 	}
@@ -25,7 +25,7 @@ module.exports = class Server {
 		
 		this.app.listen(g.port, function(){
 
-		  	console.log("runing at port: ", g.port);
+		  	console.log("runing at port: ", g.settings.port);
 		});
 	}
 }
