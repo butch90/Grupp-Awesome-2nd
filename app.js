@@ -28,8 +28,8 @@ g.settings = {
   classes: [
         'Mongo',
         'Server',
-        'Routing',
-        'Login'
+        'Login',
+        'Employess'
     ],
   Login: {
     route: '/bilverkstan/login'
