@@ -6,10 +6,6 @@ module.exports = class Server {
 
 		this.app = m.express();
 
-		this.app.use(m.bodyparser.json());
-
-		this.app.use(m.bodyparser.urlencoded({extended: false}));
-
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
 		this.setup();
@@ -28,7 +24,7 @@ module.exports = class Server {
 		this.app.use(m.cookieparser());
 		this.app.use(m.bodyparser.urlencoded({extended: false}));
 
-		// Mongoose classes
+		// Mongoose schema classes
 		new g.classes.OrderRow(this.app);
 		
 		this.app.listen(me.settings.port, function(){
