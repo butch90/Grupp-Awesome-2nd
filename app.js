@@ -28,11 +28,15 @@ g.settings = {
     Server: require("./classes/Server.class"),
     Mongo: require("./classes/Mongo.class"),
     Routing: require('./classes/Routing.class'),
-    Login: require('./classes/Login.class')
+    Login: require('./classes/Login.class'),
+    Employee: require('./classes/Employee.class'),
 
   },
   Login: {
-    route: '/rest/login'
+    route: '/bilverkstan/login'
+  }, 
+  Employee: {
+    route: '/bilverkstan/employee'
   }
 };
 
