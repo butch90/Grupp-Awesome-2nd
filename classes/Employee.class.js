@@ -20,31 +20,30 @@ module.exports = class Employee {
 			}
 			me[req.method](model, params, req, res);
 		});
+	}
+	GET(model, params, req, res) {
+		res.send("GET");
+		/*User.find({}, function(err, result) {
+    	var userMap = {};
 
-		GET(model, params, req, res) {
-			res.send("GET");
-			/*User.find({}, function(err, result) {
-	    	var userMap = {};
+	    result.forEach(function(user) {
+	      userMap[user._id] = user;
+	    });
 
-		    result.forEach(function(user) {
-		      userMap[user._id] = user;
-		    });
+	    res.send(userMap);  
+	  });*/
+	}
 
-		    res.send(userMap);  
-		  });*/
-		}
+	POST(model, params, req, res) {
+		res.send("POST");
+	}
 
-		POST(model, params, req, res) {
-			res.send("POST");
-		}
+	PUT(model, params, req, res) {
+		res.send("PUT");
+	}
 
-		PUT(model, params, req, res) {
-			res.send("PUT");
-		}
-
-		DELETE(model, params, req, res) {
-			res.send("DELETE");
-		}
+	DELETE(model, params, req, res) {
+		res.send("DELETE");
 	}
 }
 
