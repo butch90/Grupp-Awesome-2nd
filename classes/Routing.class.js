@@ -10,6 +10,8 @@ module.exports = class Routing {
 	setup(){
 		this.app.all(this.settings.route, function(req, res) {
 
+
+			me[req.method](model, req.params, req.body, req, res);
     }
 
 		DELETE(model, params, body, req, res) {
