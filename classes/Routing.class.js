@@ -17,9 +17,8 @@ module.exports = class Routing {
 		me[req.method](model, req.params, req.body, req, res);
     }
 
-
-		DELETE(model, params, body, req, res) {
-		  if (!params.modelID) { this.error({error: 'Missing ID!'}, res); return; }
+	DELETE(model, params, body, req, res) {
+	    if (!params.modelID) { this.error({error: 'Missing ID!'}, res); return; }
 
 			var me = this;
 			model.findByIdAndRemove(params.modelID, function(err, result) {

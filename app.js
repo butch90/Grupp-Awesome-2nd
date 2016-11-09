@@ -1,4 +1,5 @@
 m = {};
+g = {};
 
 [
 
@@ -24,6 +25,12 @@ g.settings = {
     endpoint: '*',
     webRoot: 'www'
   },
+  classes: [
+        'Mongo',
+        'Server',
+        'Routing',
+        'Login'
+    ],
   classes: {
     Server: require("./classes/Server.class"),
     Mongo: require("./classes/Mongo.class"),
@@ -39,6 +46,11 @@ g.settings = {
     route: '/bilverkstan/employee'
   }
 };
+
+g.classes = {};
+g.settings.classes.forEach((x)=>{
+    g.classes[x] = require(m.path.join(g.settings.appRoot + 'classes/' + x + '.class.js'));
+});
 
 // Connect to MongoDB
 new g.classes.Mongo();
