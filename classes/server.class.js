@@ -30,8 +30,9 @@ module.exports = class Server {
 
 		// Mongoose classes
 		new g.classes.OrderRow(this.app);
+		new g.classes.Order(this.app);
 		new g.classes.Employee(this.app);
-
+		
 		this.app.listen(me.settings.port, function(){
 
 			var date = new Date();
