@@ -2,7 +2,6 @@ m = {};
 g = {};
 
 [
-
     "express",
     "express-session",
     "compression",
@@ -30,12 +29,17 @@ g.settings = {
         'Server',
         'Login',
         'Employess'
+        'OrderRow',
+        'Part'
     ],
   Login: {
-    route: '/bilverkstan/login'
-  }, 
+    route: '/bilverkstad/login'
+  },
   Employee: {
-    route: '/bilverkstan/employee'
+    route: '/bilverkstad/employee'
+  },
+  Part: {
+    route: '/bilverkstad/part'
   }
 };
 
