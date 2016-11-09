@@ -26,7 +26,8 @@ module.exports = class Server {
 
 		// Mongoose schema classes
 		new g.classes.OrderRow(this.app);
-		
+		new g.classes.Employee(this.app);
+
 		this.app.listen(me.settings.port, function(){
 
 			var date = new Date();

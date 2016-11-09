@@ -27,19 +27,19 @@ g.settings = {
   classes: [
         'Mongo',
         'Server',
-        'Routing',
         'Login',
+        'Employess'
         'OrderRow',
         'Part'
     ],
   Login: {
-    route: '/bilverkstan/login'
+    route: '/bilverkstad/login'
   },
   Employee: {
-    route: '/bilverkstan/employee'
+    route: '/bilverkstad/employee'
   },
   Part: {
-    route: '/bilverkstan/part'
+    route: '/bilverkstad/part'
   }
 };
 
