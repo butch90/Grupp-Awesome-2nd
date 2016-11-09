@@ -18,10 +18,10 @@ module.exports = class Employee {
 				res.end();
 				return;
 			}
-			me[req.method](model, params, req, res);
+			me[req.method](/*model, params, */req, res);
 		});
 	}
-	GET(model, params, req, res) {
+	GET(/*model, params, */req, res) {
 		res.send("GET");
 		/*User.find({}, function(err, result) {
     	var userMap = {};
@@ -34,15 +34,15 @@ module.exports = class Employee {
 	  });*/
 	}
 
-	POST(model, params, req, res) {
+	POST(/*model, params, */req, res) {
 		res.send("POST");
 	}
 
-	PUT(model, params, req, res) {
+	PUT(/*model, params, */req, res) {
 		res.send("PUT");
 	}
 
-	DELETE(model, params, req, res) {
+	DELETE(/*model, params, */req, res) {
 		res.send("DELETE");
 	}
 }
