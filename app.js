@@ -27,6 +27,8 @@ g.settings = {
         'Mongo',
         'Server',
         'Login',
+        'OrderRow',
+        'Order',
         'Employee',
         'OrderRow',
         'Part'
@@ -35,6 +37,9 @@ g.settings = {
     route: '/bilverkstad/login'
   },
   Employee: {
+    route: '/bilverkstad/employee'
+  },
+  Order: {
     route: '/bilverkstad/employee'
   },
   Part: {
