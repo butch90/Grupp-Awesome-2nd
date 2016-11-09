@@ -29,13 +29,17 @@ g.settings = {
         'Server',
         'Routing',
         'Login',
-        'OrderRow'
+        'OrderRow',
+        'Order'
     ],
   Login: {
     route: '/bilverkstan/login'
   }, 
   Employee: {
     route: '/bilverkstan/employee'
+  },
+  Order: {
+    route: '/bilverkstan/order'
   }
 };
 
