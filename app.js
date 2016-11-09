@@ -1,4 +1,5 @@
 m = {};
+g = {};
 
 [
 
@@ -18,23 +19,27 @@ m = {};
 var appRoot = m.path.normalize(__dirname +'/');
 
 g.settings = {
-  appRoot: appRoot,
-  Server: {
-    port: 3000,
-    endpoint: '*',
-    webRoot: 'www'
-  },
-  classes: {
-    Server: require("./classes/Server.class"),
-    Mongo: require("./classes/Mongo.class"),
-    Routing: require('./classes/Routing.class'),
-    Login: require('./classes/Login.class')
-
-  },
-  Login: {
-    route: '/rest/login'
-  }
+    appRoot: appRoot,
+    Server: {
+        port: 3000,
+        endpoint: '*',
+        webRoot: 'www'
+    },
+    classes: [
+        'Mongo',
+        'Server',
+        'Routing',
+        'Login'
+    ],
+    Login: {
+        route: '/rest/login'
+    }
 };
+
+g.classes = {};
+g.settings.classes.forEach((x)=>{
+    g.classes[x] = require(m.path.join(g.settings.appRoot + 'classes/' + x + '.class.js'));
+});
 
 // Connect to MongoDB
 new g.classes.Mongo();
