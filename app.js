@@ -2,6 +2,7 @@ m = {};
 
 [
   "express",
+  "express-session",
   "compression",
   "path",
   "fs",
@@ -11,10 +12,15 @@ m = {};
   m[x.replace(/\W/g,'')] = require(x);
 });
 
-g = {
-  port: 3000,
-  appRoot: m.path.normalize(__dirname +'/'),
-  webRoot: 'www'
+var appRoot: m.path.normalize(__dirname +'/'),
+g.settings = {
+  Server: {
+    port: 3000,
+    webRoot: 'www',
+    endpoint: '*',
+  },
+  appRoot : appRoot,
+  
 };
 
 //Variabler
