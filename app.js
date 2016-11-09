@@ -10,7 +10,6 @@ g = {};
     "body-parser",
     "cookie-parser",
     "mongoose"
-
 ].forEach(function(x){
     m[x.replace(/\W/g,'')] = require(x);
 });

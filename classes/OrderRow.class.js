@@ -1,7 +1,7 @@
 module.exports = class OrderRow {
 	constructor(app) {
 		this.app = app;
-
+		
 		this.router();
 	}
 
