@@ -10,7 +10,7 @@ module.exports = class Server {
 
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
-		this.mongo = new Mongo(this.app);
+		new g.classes.Mongo(this.app);
 
 		this.setup();
 	}

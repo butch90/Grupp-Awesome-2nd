@@ -1,24 +1,27 @@
 m = {};
 
 [
-  "express",
-  "compression",
-  "path",
-  "fs",
-  "body-parser",
-  "mongoose"
+    "express",
+    "express-session",
+    "compression",
+    "path",
+    "fs",
+    "body-parser",
+    "cookie-parser",
+    "mongoose"
 ].forEach(function(x){
-  m[x.replace(/\W/g,'')] = require(x);
+    m[x.replace(/\W/g,'')] = require(x);
 });
 
 g = {
-  port: 3000,
-  appRoot: m.path.normalize(__dirname +'/'),
-  webRoot: 'www'
+    port: 3000,
+    appRoot: m.path.normalize(__dirname +'/'),
+    webRoot: 'www',
+    classes: {
+        Server: require("./classes/Server.class"),
+        Mongo: require("./classes/Mongo.class")
+    }
 };
 
-//Variabler
-var Server = require("./classes/Server.class"),
-		Mongo = require("./classes/Mongo.class");
 //Start server
-var startServer = new Server(Mongo);
+new g.classes.Server();
