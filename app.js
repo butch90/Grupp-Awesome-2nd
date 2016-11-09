@@ -27,8 +27,8 @@ g.settings = {
   classes: [
         'Mongo',
         'Server',
-        'Routing',
         'Login',
+        'Employee',
         'OrderRow',
         'Part'
     ],
