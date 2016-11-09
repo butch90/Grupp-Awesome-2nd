@@ -1,10 +1,14 @@
-module.exports = class Mongo {
+var connection;
 
+module.exports = class Mongo {
 	constructor(){
+		if (connection) { return; }
 
 		this.mongo = m.mongoose;
 
 		this.connect();
+
+		this.loadModels();
 	}
 
 	connect(){
@@ -15,5 +19,18 @@ module.exports = class Mongo {
 		  	console.log("error", err.stack)
 		  }
 		});
+
+		connection = this.mongo.connection;
+	}
+	getModel(modelName) {
+		return this.mongo.model(modelName);
+	}
+	loadModels() {
+		var models = m.fs.readdirSync(m.path.join(g.settings.appRoot,'schemas/'));
+
+		models.forEach(function (file) {
+			m.path.join(g.settings.appRoot, file);
+			console.log('models loaded: ', file);
+		}, this);
 	}
 }
