@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "*",
     "express-session": "*",
+    "path": "*",
     "fs": "*",
     "body-parser": "*",
     "cookie-parser": "*",

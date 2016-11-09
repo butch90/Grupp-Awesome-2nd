@@ -19,9 +19,14 @@ g = {
     webRoot: 'www',
     classes: {
         Server: require("./classes/Server.class"),
-        Mongo: require("./classes/Mongo.class")
+        Mongo: require("./classes/Mongo.class"),
+        Routing: require('./classes/Routing.class'),
+        Login: require('./classes/Login.class')
     }
 };
 
-//Start server
+// Connect to MongoDB
+new g.classes.Mongo();
+
+// Start server
 new g.classes.Server();

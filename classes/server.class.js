@@ -10,8 +10,6 @@ module.exports = class Server {
 
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
-		new g.classes.Mongo(this.app);
-
 		this.setup();
 	}
 
@@ -25,7 +23,10 @@ module.exports = class Server {
 		
 		this.app.listen(g.port, function(){
 
-		  	console.log("runing at port: ", g.port);
+			var date = new Date();
+			var time = ((date.getHours() < 10) ? ('0' + date.getHours()) : date.getHours()) + ':' + ((date.getMinutes() < 10) ? ('0' + date.getMinutes()) : date.getMinutes());
+
+		  	console.log("Server started at port: ", g.port + '\nTime: ' + time);
 		});
 	}
 }
