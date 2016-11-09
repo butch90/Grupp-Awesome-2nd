@@ -1,17 +1,13 @@
 module.exports = class Mongo {
 
-	constructor(app){
+	constructor(){
 
-		this.modelInstances = {};
+		// Use m.mongoose for connection
 
-		this.app = app;
-
-		this.mongo = m.Mongo;
-
-		this.setup();
+		this.connect();
 	}
 
-	setup(){
+	connect(){
 		
 	}
 
