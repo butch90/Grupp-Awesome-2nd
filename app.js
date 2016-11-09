@@ -29,7 +29,7 @@ g.settings = {
         'Server',
         'Login',
         'OrderRow',
-        'Order'
+        'Order',
         'Employee',
         'OrderRow',
         'Part'
