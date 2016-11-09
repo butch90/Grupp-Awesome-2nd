@@ -18,22 +18,25 @@ g = {};
 var appRoot = m.path.normalize(__dirname +'/');
 
 g.settings = {
-    appRoot: appRoot,
-    Server: {
-        port: 3000,
-        endpoint: '*',
-        webRoot: 'www'
-    },
-    classes: [
+  appRoot: appRoot,
+  Server: {
+    port: 3000,
+    endpoint: '*',
+    webRoot: 'www'
+  },
+  classes: [
         'Mongo',
         'Server',
         'Routing',
         'Login',
         'OrderRow'
     ],
-    Login: {
-        route: '/rest/login'
-    }
+  Login: {
+    route: '/bilverkstan/login'
+  }, 
+  Employee: {
+    route: '/bilverkstan/employee'
+  }
 };
 
 g.classes = {};
