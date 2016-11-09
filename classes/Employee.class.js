@@ -22,16 +22,16 @@ module.exports = class Employee {
 		});
 	}
 	GET(/*model, params, */req, res) {
-		res.send("GET");
-		/*User.find({}, function(err, result) {
+		var models = require('../schemas/Employee');
+		models.find({}, function(err, result) {
     	var userMap = {};
 
 	    result.forEach(function(user) {
 	      userMap[user._id] = user;
 	    });
-
+	    console.log(result, userMap, "userMap");
 	    res.send(userMap);  
-	  });*/
+	  });
 	}
 
 	POST(/*model, params, */req, res) {
