@@ -33,13 +33,13 @@ g.settings = {
         'Part'
     ],
   Login: {
-    route: '/bilverkstan/login'
+    route: '/bilverkstad/login'
   },
   Employee: {
-    route: '/bilverkstan/employee'
+    route: '/bilverkstad/employee'
   },
   Part: {
-    route: '/bilverkstan/part'
+    route: '/bilverkstad/part'
   }
 };
 
