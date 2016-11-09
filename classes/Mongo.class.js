@@ -2,7 +2,7 @@ module.exports = class Mongo {
 
 	constructor(){
 
-		this.mongo = require("mongoose");
+		this.mongo = m.mongoose;
 
 		this.connect();
 	}

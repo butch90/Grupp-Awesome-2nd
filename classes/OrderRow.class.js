@@ -9,7 +9,11 @@ module.exports = class OrderRow {
 		var me = this;
 
 		this.app.all('/bilverkstan/orderrow/:employee?', (req,res)=>{
-
+			(!req.method) && (()=>{
+				res.sendStatus(404);
+				res.end();
+				return;
+			})
 			console.log(req.method);
 
 			var params = req.body || {};
