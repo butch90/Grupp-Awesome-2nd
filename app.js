@@ -2,7 +2,6 @@ m = {};
 g = {};
 
 [
-
     "express",
     "express-session",
     "compression",
@@ -29,7 +28,8 @@ g.settings = {
         'Mongo',
         'Server',
         'Routing',
-        'Login'
+        'Login',
+        'OrderRow'
     ],
     Login: {
         route: '/rest/login'
