@@ -28,7 +28,7 @@ g.settings = {
         'Mongo',
         'Server',
         'Login',
-        'Employess'
+        'Employee',
         'OrderRow',
         'Part'
     ],
