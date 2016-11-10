@@ -24,15 +24,16 @@ module.exports = class Part {
     }
 
     GET(req, res) {
-        this.models.find({}, function(err, result) {
-        var partMap = {};
+        var part = req.body;
 
-        result.forEach(function(part) {
-            partMap[part._id] = part;
+        var method = req.params.id ? 'findById' : 'find';
+
+        var partId = req.params.id ? req.params.id : {};
+
+        this.models[method](partId, part, function(err, result) {
+          if (err) { console.log(err.stack); }
+          res.json(result);
         });
-        console.log(result, partMap, "partMap");
-        res.send(partMap);
-      });
     }
 
     POST(req, res) {
@@ -45,10 +46,20 @@ module.exports = class Part {
     }
 
     PUT(req, res) {
+        var part = req.body;
 
+        this.models.findByIdAndUpdate(req.params.id, part, function(err, result) {
+          if (err) { console.log(err.stack); }
+          res.json(result);
+        });
     }
 
     DELETE(req, res) {
+        var part = req.body;
 
+        this.models.findByIdAndRemove(req.params.id, part, function(err, result) {
+          if (err) { console.log(err.stack); }
+          res.json(result);
+        });
     }
 };
