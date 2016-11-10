@@ -34,4 +34,21 @@ module.exports = class Part {
         res.send(partMap);
       });
     }
+
+    POST(req, res) {
+        var part = req.body;
+
+        this.models.create(part, function(err, result) {
+          if (err) { console.log(err.stack); }
+          res.json(result);
+        });
+    }
+
+    PUT(req, res) {
+
+    }
+
+    DELETE(req, res) {
+
+    }
 };
