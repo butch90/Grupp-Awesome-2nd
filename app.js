@@ -28,7 +28,6 @@ g.settings = {
         'Mongo',
         'Server',
         'Login',
-        'OrderRow',
         'Order',
         'Employee',
         'OrderRow',
