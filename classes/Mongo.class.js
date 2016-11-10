@@ -23,7 +23,7 @@ module.exports = class Mongo {
 		connection = this.mongo.connection;
 	}
 	getModel(modelName) {
-		return this.mongo.model(modelName);
+		return m.mongoose.model(modelName);
 	}
 	loadModels() {
 		var models = m.fs.readdirSync(m.path.join(g.settings.appRoot,'schemas/'));
