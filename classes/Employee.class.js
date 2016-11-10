@@ -53,7 +53,10 @@ module.exports = class Employee {
 		});
 	}
 
-	DELETE(/*model, params, */req, res) {
-		res.send("DELETE");
+	DELETE(req, res) {
+		Todo.findByIdAndRemove(req.params.id, req.body, (err, result) => {
+    if(err) console.log("err", err.stack);
+    res.json(result, "deleted");
+  });
 	}
 }
