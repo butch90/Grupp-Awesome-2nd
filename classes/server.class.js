@@ -1,5 +1,5 @@
 module.exports = class Server {
- 
+
 	constructor(Mongo){
 
 		this.settings = g.settings.Server;
@@ -32,7 +32,8 @@ module.exports = class Server {
 		new g.classes.OrderRow(this.app);
 		new g.classes.Order(this.app);
 		new g.classes.Employee(this.app);
-		
+        new g.classes.Part(this.app);
+
 		this.app.listen(me.settings.port, function(){
 
 			var date = new Date();
