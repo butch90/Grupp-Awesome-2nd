@@ -41,7 +41,7 @@ g.settings = {
     route: '/bilverkstad/employee'
   },
   Order: {
-    route: '/bilverkstad/order'
+    route: '/bilverkstad/order/:id?'
   },
   Part: {
     route: '/bilverkstad/part'

@@ -2,8 +2,8 @@ module.exports = class Order {
 
 	constructor(express) {
 		this.app = express;
-		// this.DB  = new g.classes.Mongo();
-		// this.model = this.DB.getModel('Order');
+		this.dataBase  = new g.classes.Mongo();
+		this.model = this.dataBase.getModel('Order');
 
 		this.router();
 	}
@@ -20,8 +20,28 @@ module.exports = class Order {
 
 	POST(req, res) {
 
-		var body = req.body || {};
-		res.json('Post');
+		var data = req.body || {};
+
+		this.model.create(data, function(err, data) {
+			if(err) {
+				console.log(err.stack);
+				res.json(err.stack);
+			}
+			res.json(data);
+			
+		});
+
+	}
+	GET(req, res) {
+
+		var method = req.params.id ? 'findById' : 'find';
+		var data = req.params.id ? req.params.id : {};
+		this.model[method](data, function(err, data) {
+			if(err) {
+				res.json(err.stack);
+			}
+			res.json(data);
+		})
 	}
 
 }
