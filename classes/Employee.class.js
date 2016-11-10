@@ -26,15 +26,24 @@ module.exports = class Employee {
 
 	GET(req, res) {
 		console.log("GET")
-		this.model.find({}, function(err, result) {
+		var method = req.params.id ? 'findById' : 'find';
+		var data = req.params.id ? req.params.id : {};
+		this.model[method](data, function(err, data) {
+			if(err) {
+				res.json(err.stack);
+			}
+			res.json(data);
+		});
+		/*var method = req.params.id ? 'findById' : 'find';
+		var data = req.params.id ? req.params.id : {};
+		this.model[method](data, function(err, result) {
     	var employeeMap = {};
 
 	    result.forEach(function(user) {
 	      employeeMap[user._id] = user;
 	    });
-	    /*console.log(result, employeeMap, "employeeMap");*/
 	    res.send(employeeMap);  
-	  });
+	  });*/
 	}
 
 	POST(req, res) {
@@ -53,7 +62,10 @@ module.exports = class Employee {
 		});
 	}
 
-	DELETE(/*model, params, */req, res) {
-		res.send("DELETE");
+	DELETE(req, res) {
+		this.model.findByIdAndRemove(req.params.id, req.body, (err, result) => {
+    if(err) console.log("err", err.stack);
+    res.json("deleted");
+  });
 	}
 }
