@@ -29,7 +29,7 @@ module.exports = class Mongo {
 		var models = m.fs.readdirSync(m.path.join(g.settings.appRoot,'schemas/'));
 
 		models.forEach(function (file) {
-			m.path.join(g.settings.appRoot, file);
+			require(m.path.join(g.settings.modelDir, file));
 			console.log('models loaded: ', file);
 		}, this);
 	}

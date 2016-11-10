@@ -19,6 +19,7 @@ var appRoot = m.path.normalize(__dirname +'/');
 
 g.settings = {
   appRoot: appRoot,
+  modelDir: m.path.join(appRoot, 'schemas/'),
   Server: {
     port: 3000,
     endpoint: '*',
