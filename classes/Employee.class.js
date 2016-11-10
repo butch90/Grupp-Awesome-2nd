@@ -3,6 +3,8 @@ var options = g.settings;
 module.exports = class Employee {
 
 	constructor (express) {
+		this.mongo = new g.classes.Mongo();
+		this.model = this.mongo.getModel('Employee');
 		this.app = express;
 		this.settings = options.Employee;
 		this.employeeREST();
@@ -21,9 +23,11 @@ module.exports = class Employee {
 			me[req.method](/*model, params, */req, res);
 		});
 	}
+
 	GET(/*model, params, */req, res) {
-		var models = require('../schemas/Employee');
-		models.find({}, function(err, result) {
+
+		/*var models = require('../schemas/Employee');*/
+		this.model.find({}, function(err, result) {
     	var employeeMap = {};
 
 	    result.forEach(function(user) {
