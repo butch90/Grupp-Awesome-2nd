@@ -13,41 +13,47 @@ module.exports = class Employee {
 	employeeREST(){
 
 		var me = this;
-
+		
 		this.app.all(this.settings.route, (req, res) =>{
 			if(!me[req.method]) {
 				res.sendStatus(404);
 				res.end();
 				return;
 			}
-			me[req.method](/*model, params, */req, res);
+			me[req.method](req, res);
 		});
 	}
 
-	GET(/*model, params, */req, res) {
-
-		/*var models = require('../schemas/Employee');*/
+	GET(req, res) {
+		console.log("GET")
 		this.model.find({}, function(err, result) {
     	var employeeMap = {};
 
 	    result.forEach(function(user) {
 	      employeeMap[user._id] = user;
 	    });
-	    console.log(result, employeeMap, "employeeMap");
+	    /*console.log(result, employeeMap, "employeeMap");*/
 	    res.send(employeeMap);  
 	  });
 	}
 
-	POST(/*model, params, */req, res) {
-		res.send("POST");
+	POST(req, res) {
+		console.log("POST")
+		this.model.create(req.body, (err, result) => {
+	    if(err) console.log("err", err.stack);
+	    res.json(result);
+	  });
 	}
 
-	PUT(/*model, params, */req, res) {
-		res.send("PUT");
+	PUT(req, res) {
+		console.log("PUT")
+		this.model.findByIdAndUpdate(req.params.id, req.body, (err, result) => {
+			if(err) console.log("err", err.stack);
+			res.json(result);
+		});
 	}
 
 	DELETE(/*model, params, */req, res) {
 		res.send("DELETE");
 	}
 }
-

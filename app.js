@@ -2,14 +2,14 @@ m = {};
 g = {};
 
 [
-    "express",
-    "express-session",
-    "compression",
-    "path",
-    "fs",
-    "body-parser",
-    "cookie-parser",
-    "mongoose"
+  "express",
+  "express-session",
+  "compression",
+  "path",
+  "fs",
+  "body-parser",
+  "cookie-parser",
+  "mongoose"
 
 ].forEach(function(x){
     m[x.replace(/\W/g,'')] = require(x);
@@ -26,14 +26,14 @@ g.settings = {
     webRoot: 'www'
   },
   classes: [
-        'Mongo',
-        'Server',
-        'Login',
-        'Order',
-        'Employee',
-        'OrderRow',
-        'Part'
-    ],
+    'Mongo',
+    'Server',
+    'Login',
+    'Order',
+    'Employee',
+    'OrderRow',
+    'Part'
+  ],
   Login: {
     route: '/bilverkstad/login'
   },
@@ -44,7 +44,7 @@ g.settings = {
     route: '/bilverkstad/order'
   },
   Part: {
-    route: '/bilverkstad/part'
+    route: '/bilverkstad/part/:id?'
   }
 };
 
