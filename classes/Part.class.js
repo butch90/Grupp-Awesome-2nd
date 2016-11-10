@@ -1,8 +1,10 @@
+var options = g.settings;
+
 module.exports = class Part {
 
     constructor(express){
         this.app = express;
-
+        this.settings = options.Part;
         this.router();
     }
 
@@ -20,6 +22,18 @@ module.exports = class Part {
     }
 
     GET(req, res) {
+
+        res.send("GET");
+        /*var models = require('../schemas/Part');
+        models.find({}, function(err, result) {
+        var Parts = {};
+
+        result.forEach(function(part) {
+          Parts[part._id] = part;
+        });
+        console.log(result, Parts, "Parts");
+        res.send(Parts);
+      });*/
     }
 
 };

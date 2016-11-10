@@ -2,8 +2,8 @@ module.exports = class Order {
 
 	constructor(express) {
 		this.app = express;
-		// this.DB  = this.DB();
-		// this.model = g.classes.getModel('order');
+		// this.DB  = new g.classes.Mongo();
+		// this.model = this.DB.getModel('Order');
 
 		this.router();
 	}
