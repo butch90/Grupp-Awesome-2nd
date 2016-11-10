@@ -2,8 +2,8 @@ module.exports = class Order {
 
 	constructor(express) {
 		this.app = express;
-		// this.DB  = new g.classes.DB();
-		// this.model = this.DB.getModel('order');
+		// this.DB  = this.DB();
+		// this.model = g.classes.getModel('order');
 
 		this.router();
 	}
@@ -14,7 +14,7 @@ module.exports = class Order {
 				res.sendStatus(404);
 				return;
 			}
-		me[req.method](req, res);
+			me[req.method](req, res);
 		});
 	}
 
