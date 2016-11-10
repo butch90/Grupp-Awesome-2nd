@@ -24,13 +24,13 @@ module.exports = class Employee {
 	GET(/*model, params, */req, res) {
 		var models = require('../schemas/Employee');
 		models.find({}, function(err, result) {
-    	var userMap = {};
+    	var employeeMap = {};
 
 	    result.forEach(function(user) {
-	      userMap[user._id] = user;
+	      employeeMap[user._id] = user;
 	    });
-	    console.log(result, userMap, "userMap");
-	    res.send(userMap);  
+	    console.log(result, employeeMap, "employeeMap");
+	    res.send(employeeMap);  
 	  });
 	}
 
