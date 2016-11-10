@@ -42,4 +42,4 @@ module.exports = class Server {
 		  	console.log("Server started at port: " + me.settings.port + '\nTime: ' + time);
 		});
 	}
-}
+};
