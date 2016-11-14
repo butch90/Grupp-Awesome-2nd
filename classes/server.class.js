@@ -33,6 +33,7 @@ module.exports = class Server {
 		new g.classes.Order(this.app);
 		new g.classes.Employee(this.app);
         new g.classes.Part(this.app);
+        new g.classes.REST(this.app);
 
 		this.app.listen(me.settings.port, function(){
 

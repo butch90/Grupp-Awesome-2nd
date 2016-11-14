@@ -1,27 +1,28 @@
-module.exports = class Order {
+module.exports = class REST {
 
 	constructor(express) {
 		this.app = express;
 		this.dataBase  = new g.classes.Mongo();
-		this.order = this.dataBase.getModel('Order');
 
 		this.router();
 	}
 	router() {
 		var me = this;
-		this.app.all(g.settings.Order.route, function(req, res) {
+		this.app.all(g.settings.REST.route, function(req, res) {
+			var model = me.dataBase.getModel(req.params.model);
+			console.log('rest');
 			if (!me[req.method]) {
 				res.sendStatus(404);
 				return;
 			}
 
-			me[req.method](req, res);
+			me[req.method](req, res, model);
 		});
 	}
 
-	POST(req, res) {
+	POST(req, res, model) {
 
-		this.order.create(req.body, function(err, data) {
+		model.create(req.body, function(err, data) {
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);
@@ -31,21 +32,21 @@ module.exports = class Order {
 		});
 
 	}
-	GET(req, res) {
+	GET(req, res, model) {
 
 		var query = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
 
-		this.order[query](data, function(err, result) {
+		model[query](data, function(err, result) {
 			if(err) {
 				res.json(err.stack);
 			}
 			res.json(result);
 		});
 	}
-	PUT(req, res) {
+	PUT(req, res, model) {
 
-		this.order.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
+		model.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 				console.log(err.stack);
@@ -54,9 +55,9 @@ module.exports = class Order {
 		});
 
 	}
-	DELETE(req, res) {
+	DELETE(req, res, model) {
 
-		this.order.findByIdAndRemove(req.params.id, function(err, data) {
+		model.findByIdAndRemove(req.params.id, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 				console.log(err.stack);
