@@ -34,16 +34,6 @@ module.exports = class Employee {
 			}
 			res.json(data);
 		});
-		/*var method = req.params.id ? 'findById' : 'find';
-		var data = req.params.id ? req.params.id : {};
-		this.model[method](data, function(err, result) {
-    	var employeeMap = {};
-
-	    result.forEach(function(user) {
-	      employeeMap[user._id] = user;
-	    });
-	    res.send(employeeMap);  
-	  });*/
 	}
 
 	POST(req, res) {
