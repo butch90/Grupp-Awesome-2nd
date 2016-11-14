@@ -63,6 +63,7 @@ module.exports = class Employee {
 	}
 
 	DELETE(req, res) {
+		console.log("DELETE")
 		this.model.findByIdAndRemove(req.params.id, req.body, (err, result) => {
     if(err) console.log("err", err.stack);
     res.json("deleted");
