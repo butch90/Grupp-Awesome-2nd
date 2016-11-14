@@ -5,6 +5,7 @@ module.exports = class Order {
 		this.dataBase  = new g.classes.Mongo();
 		this.order = this.dataBase.getModel('Order');
 
+		var me = this;
 		this.router();
 	}
 	router() {
@@ -19,9 +20,13 @@ module.exports = class Order {
 		});
 	}
 
+	
 	POST(req, res) {
-
+		var me = this;
 		this.order.create(req.body, function(err, data) {
+			/*me.order.findOne(data).populate('Customer._id').exec(err, data) => {
+				console.log(true);
+			}*/
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);

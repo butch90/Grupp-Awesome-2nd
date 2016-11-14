@@ -9,7 +9,8 @@ g = {};
   "fs",
   "body-parser",
   "cookie-parser",
-  "mongoose"
+  "mongoose",
+  "mysql"
 
 ].forEach(function(x){
     m[x.replace(/\W/g,'')] = require(x);
@@ -33,7 +34,8 @@ g.settings = {
     'Employee',
     'OrderRow',
     'Part',
-    'Customer'
+    'Customer',
+    "MySQL"
   ],
   Login: {
     route: '/bilverkstad/login/:id?'
