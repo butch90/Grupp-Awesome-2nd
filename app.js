@@ -32,7 +32,8 @@ g.settings = {
     'Order',
     'Employee',
     'OrderRow',
-    'Part'
+    'Part',
+    'Customer'
   ],
   Login: {
     route: '/bilverkstad/login/:id?'
@@ -45,6 +46,9 @@ g.settings = {
   },
   Part: {
     route: '/bilverkstad/part/:id?'
+  },
+  Customer: {
+    route: '/bilverkstad/customer/:id?'
   }
 };
 
