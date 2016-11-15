@@ -2,8 +2,8 @@ module.exports = class Order {
 
 	constructor(express) {
 		this.app = express;
-		// this.DB  = new g.classes.DB();
-		// this.model = this.DB.getModel('order');
+		this.dataBase  = new g.classes.Mongo();
+		this.order = this.dataBase.getModel('Order');
 
 		this.router();
 	}
@@ -14,14 +14,56 @@ module.exports = class Order {
 				res.sendStatus(404);
 				return;
 			}
-		me[req.method](req, res);
+
+			me[req.method](req, res);
 		});
 	}
 
 	POST(req, res) {
 
-		var body = req.body || {};
-		res.json('Post');
+		this.order.create(req.body, function(err, data) {
+			if(err) {
+				console.log(err.stack);
+				res.json(err.stack);
+			}
+			res.json(data);
+			
+		});
+
+	}
+	GET(req, res) {
+
+		var query = req.params.id ? 'findById' : 'find';
+		var data = req.params.id ? req.params.id : {};
+
+		this.order[query](data, function(err, result) {
+			if(err) {
+				res.json(err.stack);
+			}
+			res.json(result);
+		})
+	}
+	PUT(req, res) {
+
+		this.order.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
+			if(err) {
+				res.json(err.stack);
+				console.log(err.stack);
+			}
+			res.json(req.body);
+		});
+
+	}
+	DELETE(req, res) {
+
+		this.order.findByIdAndRemove(req.params.id, function(err, data) {
+			if(err) {
+				res.json(err.stack);
+				console.log(err.stack);
+			}
+			res.json('Removed');
+		});
+
 	}
 
 }

@@ -1,6 +1,10 @@
 module.exports = class OrderRow {
 	constructor(app) {
 		this.app = app;
+
+		this.orderRow = new g.classes.Mongo().getModel('OrderRow');
+
+		console.log(this.orderRow);
 		
 		this.router();
 	}
@@ -8,35 +12,48 @@ module.exports = class OrderRow {
 	router() {
 		var me = this;
 
-		this.app.all('/bilverkstan/orderrow/:employee?', (req,res)=>{
+		this.app.all('/bilverkstad/orderrow/:id?', (req,res)=>{
 			(!req.method) && (()=>{
 				res.sendStatus(404);
 				res.end();
 				return;
-			})
-			console.log(req.method);
+			});
 
-			var params = req.body || {};
-
-			me[req.method](params, req, res);
+			me[req.method](req, res);
 		});
 	}
 
-	// 
-	GET(params, req, res) {
-		res.send('GET');
+	GET(req, res) {
+		var me = this;
+
+		console.log(req.params);
+
+		this.orderRow[(req.params.id ? 'populate' : 'find')]((req.params.id ? req.params.id : {}),
+		(err, result)=>{
+			(err) && (()=>{me.error(err,res); return;});
+			res.json(result);
+		});
+
 	}
 
-	// 
-	POST(params, req, res) {
-		res.send('POST');
+	POST(req, res) {
+		var me = this,
+			model = new this.orderRow(req.body);
+
+		model.save((err, result)=>{
+			(err) && (()=>{me.error(err,res); return;});
+			res.json(result);
+		});
 	}
 
-	DELETE(params, req, res) {
+	DELETE(req, res) {
 		res.send('DELETE');
 	}
 
-	PUT(params, req, res) {
-		res.send('PUT');
+	PUT(req, res) {
+		this.orderRow.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,result)=>{
+			(err) && (()=>{me.error(err,res); return;});
+			res.json(result);
+		});
 	}
 }

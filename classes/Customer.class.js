@@ -1,16 +1,16 @@
 var options = g.settings;
 
-module.exports = class Employee {
+module.exports = class Customer {
 
 	constructor (express) {
 		this.mongo = new g.classes.Mongo();
-		this.model = this.mongo.getModel('Employee');
+		this.model = this.mongo.getModel('Customer');
 		this.app = express;
-		this.settings = options.Employee;
-		this.employeeREST();
+		this.settings = options.Customer;
+		this.customerREST();
 	}
 
-	employeeREST(){
+	customerREST(){
 
 		var me = this;
 		
@@ -53,7 +53,6 @@ module.exports = class Employee {
 	}
 
 	DELETE(req, res) {
-		console.log("DELETE")
 		this.model.findByIdAndRemove(req.params.id, req.body, (err, result) => {
     if(err) console.log("err", err.stack);
     res.json("deleted");

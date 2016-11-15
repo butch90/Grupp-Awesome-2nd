@@ -18,32 +18,36 @@ var appRoot = m.path.normalize(__dirname +'/');
 
 g.settings = {
   appRoot: appRoot,
+  modelDir: m.path.join(appRoot, 'schemas/'),
   Server: {
     port: 3000,
     endpoint: '*',
     webRoot: 'www'
   },
   classes: [
-        'Mongo',
-        'Server',
-        'Login',
-        'OrderRow',
-        'Order',
-        'Employee',
-        'OrderRow',
-        'Part'
-    ],
+    'Mongo',
+    'Server',
+    'Login',
+    'Order',
+    'Employee',
+    'OrderRow',
+    'Part',
+    'Customer'
+  ],
   Login: {
-    route: '/bilverkstad/login'
+    route: '/bilverkstad/login/:id?'
   },
   Employee: {
-    route: '/bilverkstad/employee'
+    route: '/bilverkstad/employee/:id?'
   },
   Order: {
-    route: '/bilverkstad/employee'
+    route: '/bilverkstad/order/:id?'
   },
   Part: {
-    route: '/bilverkstad/part'
+    route: '/bilverkstad/part/:id?'
+  },
+  Customer: {
+    route: '/bilverkstad/customer/:id?'
   }
 };
 
