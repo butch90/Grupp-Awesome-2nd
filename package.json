@@ -2,11 +2,12 @@
   "name": "Bilverkstad",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "*",
+    "compression": "*",
+    "cookie-parser": "*",
     "express": "*",
     "express-session": "*",
-    "body-parser": "*",
-    "cookie-parser": "*",
     "mongoose": "*",
-    "compression": "*"
+    "mysql": "^2.12.0"
   }
 }

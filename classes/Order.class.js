@@ -43,25 +43,37 @@ module.exports = class Order {
 	}
 	GET(req, res) {
 		var me = this;
-		var query = req.params.id ? 'findById' : 'find';
-		var data = req.params.id ? req.params.id : {};
 
-		this.order[query](data, function(err, result) {
-			if(err) {
-				res.json(err.stack);
-			}
-			if(query == 'findById'){
-				me.order.findOne({_id: result._id}).populate('customer').exec((err, result)=>{
-						if(err){
-							res.json(err.stack);
-							return;
-						}
-					res.json(result);
-				})
-				return;
-			}
-			res.json(result)
-		});
+		if(req.params.id === 'active') {
+			this.order.find({ status: 'active'}, function(err, data) {
+				if(err) {
+					res.json(err);
+				}
+				res.json(data);
+			});
+		}
+		else {
+			
+			var query = req.params.id ? 'findById' : 'find';
+			var data = req.params.id ? req.params.id : {};
+
+			this.order[query](data, function(err, result) {
+				if(err) {
+					res.json(err.stack);
+				}
+					if(query == 'findById'){
+					me.order.findOne({_id: result._id}).populate('customer').exec((err, result)=>{
+							if(err){
+								res.json(err.stack);
+								return;
+							}
+						res.json(result);
+					})
+					return;
+				}
+				res.json(result);
+			});
+		}
 	}
 	PUT(req, res) {
 
