@@ -36,7 +36,7 @@ g.settings = {
     'Part',
     'REST',
     'Customer',
-    "MySQL"
+    'MySQL'
   ],
   Login: {
     route: '/bilverkstad/login/:id?'
@@ -54,7 +54,8 @@ g.settings = {
     route: '/bilverkstad/orderRow/:id?'
   },
   REST: {
-    route: '/bilverkstad/:model/:id?'
+    route: '/bilverkstad/:model/:id?',
+    routeSql: '/sql/bilverkstad/:model/:id?'
   },
   Customer: {
     route: '/bilverkstad/customer/:id?'

@@ -11,23 +11,22 @@ module.exports = class MySQL {
 			  //ersätt med eget användarnamn nedan
 			  user     : 'root',
 			  //ersätt med eget password nedan
-			  password : 'marwen',
-			  database : 'Bilverkstaden'
+			  password : 'alxw',
+			  database : 'bilverkstadsql'
 			});
 
 		this.connection.connect((err) => {
 			if(!err) {
 			  console.log("Database is connected");
-			} 
-			console.log("Error connecting database", err.stack); 
+              return;
+			}
+			console.log("Error connecting database", err);
 		});
 	}
 
-	READ() {
-		this.connection.query('SELECT * FROM sqlTable', (err, rows, fields) => {
-			if(!err){
-				console.log('No error');
-			} console.log("error", err.stack);
+	READ(table, callback) {
+		this.connection.query("SELECT * FROM " + table, (err, rows, fields) => {
+            callback(err, rows, fields);
 		});
 	}
 
@@ -42,7 +41,7 @@ module.exports = class MySQL {
 
 	POST(){
 		var data = {}
-		var table = 'insert_table_here';	
+		var table = 'insert_table_here';
 		this.connection.query('INSERT INTO' + table + 'SET', data, (err, result) => {
 			if(!err) {
 				console.log(result);
