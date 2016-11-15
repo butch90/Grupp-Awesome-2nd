@@ -25,12 +25,21 @@ module.exports = class Customer {
 	}
 
 	GET(req, res) {
+		var me = this;
 		console.log("GET")
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
+			}
+			if(method === 'findById') {
+				me.model.findOne({_id: data._id}).populate('orders').exec((err, result) => {
+					if(err) {
+						res.json(err);
+					}
+					res.json(result);
+				})
 			}
 			res.json(data);
 		});
