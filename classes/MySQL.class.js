@@ -17,7 +17,7 @@ module.exports = class MySQL {
 
 		this.connection.connect((err) => {
 			if(!err) {
-			  console.log("Database is connected");
+			  console.log("Database is connecte d");
 			} 
 			console.log("Error connecting database", err.stack); 
 		});
@@ -32,6 +32,7 @@ module.exports = class MySQL {
 	}
 
 	UPDATE(){
+		
 		var table = 'insert_table_here';
 		this.connection.query('UPDATE ' + table + 'SET row = ?, row2 = ? WHERE id = ?', [row, row2, id], (err, rows, fields) => {
 			if(!err){

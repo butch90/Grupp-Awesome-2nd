@@ -31,23 +31,26 @@ module.exports = class Login {
 	  		res.sendStatus(400);
 	  		res.end();
 	  		return;
-  	}
+  		}
 
 	  	this.model.findOne(data, (err, result) => {
 	  		if(!result){
 	  			console.log("error", err.stack);
 	  			res.json(true);
 	  		} 
-	  		req.session.isLoggedIn = result._id;
+	  		req.session.isLoggedIn = result._id; 
+	  		req.session.xUsername = result.firstname;
 	  		req.sessionID = result._id.toString();
 	  		console.log("UserId:", result._id, "is logged in.");
 	  		console.log("current session id:", req.sessionID);
+	  		res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 	  		res.json(true);
 	  	})
   	}
 
 	  GET(req, res) {
 	  	console.log("GET");
+	  	res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 	  	res.json(!!req.session.isLoggedIn);
 	  }
 

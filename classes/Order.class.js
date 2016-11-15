@@ -61,24 +61,26 @@ module.exports = class Order {
 				if(err) {
 					res.json(err.stack);
 				}
-					if(query == 'findById'){
-					me.order.findOne({_id: result._id}).populate(['customer','orderRows']).exec((err, result)=>{
+				if(query == 'findById'){
+					me.order.findOne({_id: result._id}).populate(['customer','orderRows']).lean().exec((err, result)=>{
 						result.totalHours = 0;
 						result.orderRows.forEach((x, index)=>{
 							result.totalHours += x.hours;
-							index++;
-							if(index == result.orderRows.length){
+						
+							if(index+1 == result.orderRows.length){
+								res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 								res.json(result);
 								console.log('totalHours:',result.totalHours)
 							}
 						});
-							if(err){
-								res.json(err.stack);
-								return;
-							}
+						if(err){
+							res.json(err.stack);
+							return;
+						}
 					})
 					return;
 				}
+				res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 				res.json(result);
 			});
 		}
@@ -86,7 +88,7 @@ module.exports = class Order {
 
 	PUT(req, res) {
 
-		this.order.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
+		this.order.findByIdAndUpdate(req.params.id, {new: true} ,req.body, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 				console.log(err.stack);

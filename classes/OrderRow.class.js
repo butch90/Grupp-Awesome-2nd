@@ -32,7 +32,7 @@ module.exports = class OrderRow {
 		test.exec(function (err, result) {
 			(err) && (()=>{me.ERROR(err,res); return;});
 
-			console.log(result);
+			//console.log(result);
 
 			res.json(result);
 		});
