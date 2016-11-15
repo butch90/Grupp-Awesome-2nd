@@ -23,6 +23,11 @@ module.exports = class Order {
 	
 	POST(req, res) {
 		var me = this;
+		/*var newInstance = new this.order(req.body);
+		newInstance.save((err)=>{
+			if(err){console.log("error", err.stack)};
+		})*/
+		
 		this.order.create(req.body, function(err, data) {
 			/*me.order.findOne(data).populate('Customer._id').exec(err, data) => {
 				console.log(true);
@@ -30,13 +35,14 @@ module.exports = class Order {
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);
+				return;
 			}
-			res.json(data);
 			
 		});
 
 	}
 	GET(req, res) {
+		var me = this;
 
 		if(req.params.id === 'active') {
 			this.order.find({ status: 'active'}, function(err, data) {
@@ -47,7 +53,6 @@ module.exports = class Order {
 			});
 		}
 		else {
-
 			
 			var query = req.params.id ? 'findById' : 'find';
 			var data = req.params.id ? req.params.id : {};
@@ -55,6 +60,16 @@ module.exports = class Order {
 			this.order[query](data, function(err, result) {
 				if(err) {
 					res.json(err.stack);
+				}
+					if(query == 'findById'){
+					me.order.findOne({_id: result._id}).populate('customer').exec((err, result)=>{
+							if(err){
+								res.json(err.stack);
+								return;
+							}
+						res.json(result);
+					})
+					return;
 				}
 				res.json(result);
 			});
