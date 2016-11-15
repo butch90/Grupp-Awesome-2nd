@@ -6,10 +6,6 @@ module.exports = class Server {
 
 		this.app = m.express();
 
-		this.app.use(m.bodyparser.json());
-
-		this.app.use(m.bodyparser.urlencoded({extended: false}));
-
 		//this.app.use(m.express.static(g.appRoot + g.webRoot));
 
 		this.setup();
@@ -34,7 +30,7 @@ module.exports = class Server {
 	      secret: 'bilverkstad',
 	      resave: false,
 	      saveUninitialized: true
-		}));
+	    }));
 
 		// Mongoose classes
 		new g.classes.OrderRow(this.app);

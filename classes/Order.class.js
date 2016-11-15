@@ -23,6 +23,11 @@ module.exports = class Order {
 	
 	POST(req, res) {
 		var me = this;
+		/*var newInstance = new this.order(req.body);
+		newInstance.save((err)=>{
+			if(err){console.log("error", err.stack)};
+		})*/
+		
 		this.order.create(req.body, function(err, data) {
 			/*me.order.findOne(data).populate('Customer._id').exec(err, data) => {
 				console.log(true);
@@ -30,24 +35,55 @@ module.exports = class Order {
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);
+				return;
 			}
 			res.json(data);
-			
 		});
-
 	}
+
 	GET(req, res) {
+		var me = this;
 
-		var query = req.params.id ? 'findById' : 'find';
-		var data = req.params.id ? req.params.id : {};
+		if(req.params.id === 'active') {
+			this.order.find({ status: 'active'}, function(err, data) {
+				if(err) {
+					res.json(err);
+				}
+				res.json(data);
+			});
+		}
+		else {
 
-		this.order[query](data, function(err, result) {
-			if(err) {
-				res.json(err.stack);
-			}
-			res.json(result);
-		});
+			var query = req.params.id ? 'findById' : 'find';
+			var data = req.params.id ? req.params.id : {};
+
+			this.order[query](data, function(err, result) {
+				if(err) {
+					res.json(err.stack);
+				}
+					if(query == 'findById'){
+					me.order.findOne({_id: result._id}).populate(['customer','orderRows']).exec((err, result)=>{
+						result.totalHours = 0;
+						result.orderRows.forEach((x, index)=>{
+							result.totalHours += x.hours;
+							index++;
+							if(index == result.orderRows.length){
+								res.json(result);
+								console.log('totalHours:',result.totalHours)
+							}
+						});
+							if(err){
+								res.json(err.stack);
+								return;
+							}
+					})
+					return;
+				}
+				res.json(result);
+			});
+		}
 	}
+
 	PUT(req, res) {
 
 		this.order.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
@@ -59,6 +95,7 @@ module.exports = class Order {
 		});
 
 	}
+
 	DELETE(req, res) {
 
 		this.order.findByIdAndRemove(req.params.id, function(err, data) {

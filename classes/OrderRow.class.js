@@ -1,69 +1,70 @@
 module.exports = class OrderRow {
 	constructor(app) {
 		this.app = app;
-
-		console.log('This is Order Row!');
-
-		this.dataBase  = new g.classes.Mongo();
-		this.orderRow = this.dataBase.getModel('OrderRow');
-
-		this.OrderREST();
+		this.orderRow = new g.classes.Mongo().getModel('OrderRow');
+		
+		this.router();
 	}
-	OrderREST() {
+
+	router() {
 		var me = this;
-		this.app.all(g.settings.OrderRow.route, function(req, res) {
-			if (!me[req.method]) {
+
+		this.app.all('/bilverkstad/orderrow/:id?', (req,res)=>{
+			(!req.method) && (()=>{
 				res.sendStatus(404);
+				res.end();
 				return;
-			}
+			});
 
 			me[req.method](req, res);
 		});
-	};
-	GET (req, res) {
-		var query = req.params.id ? 'findById' : 'find';
-		var data = req.params.id ? req.params.id : {};
+	}
 
-		this.orderRow[query](data, function(err, result) {
-			if(err) {
-				res.json(err);
-			}
+	GET(req, res) {
+		var me = this;
+
+		console.log(req.params);
+
+		var test = this.orderRow.find((req.params.id ? {employees: req.params.id} : {}));
+		
+		(req.params.id) && test.populate([{path: 'employees'},{path: 'parts'}]);
+
+		test.exec(function (err, result) {
+			(err) && (()=>{me.ERROR(err,res); return;});
+
+			console.log(result);
+
 			res.json(result);
 		});
-	};
+	}
+
 	POST(req, res) {
-
-		this.orderRow.create(req.body, function(err, data) {
-			if(err) {
-				console.log(err.stack);
-				res.json(err.stack);
-			}
-			res.json(data);
-			
+		var me = this;
+		new this.orderRow(req.body).save((err, result)=>{
+			(err) && (()=>{me.ERROR(err,res); return;});
+			res.json(result);
 		});
-
-	};
-	PUT(req, res) {
-
-		this.orderRow.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
-			if(err) {
-				res.json(err.stack);
-				console.log(err.stack);
-			}
-			res.json(req.body);
-		});
-
 	}
+
 	DELETE(req, res) {
+		if (!req.params.id) {this.ERROR({error:'Missing id'}, res); return};
 
-		this.orderRow.findByIdAndRemove(req.params.id, function(err, data) {
-			if(err) {
-				res.json(err.stack);
-				console.log(err.stack);
-			}
-			res.json('Removed');
+		var me = this;
+		this.orderRow.findByIdAndRemove(req.params.id, function(err, result) {
+			(err) && (()=>{me.ERROR(err,res); return;});
+			res.json(true);
 		});
-
 	}
 
+	PUT(req, res) {
+		this.orderRow.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,result)=>{
+			(err) && (()=>{me.ERROR(err,res); return;});
+			res.json(result);
+		});
+	}
+
+	ERROR(err,res) {
+		res.status(400);
+		res.json(err);
+	}
 }
