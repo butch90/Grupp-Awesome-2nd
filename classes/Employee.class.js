@@ -38,12 +38,15 @@ module.exports = class Employee {
 			if(method === 'findById') {
 				orderRow.find( { employees: data._id }, function(err, result) {
 
-					order.find( { orderRows: result._id }, function(err, result) {
-						
-						res.json(result);
+					result.forEach( function(data, index){
+						order.find( { orderRows: result[index]._id }, function(err, result) {
 
+							res.json(result);
+
+						});
+						return;
 					});
-					return;
+
 				});
 	
 				return;
