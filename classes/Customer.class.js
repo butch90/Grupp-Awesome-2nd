@@ -39,7 +39,9 @@ module.exports = class Customer {
 						res.json(err);
 					}
 					res.json(result);
-				})
+					return;
+				});
+				return;
 			}
 			res.json(data);
 		});

@@ -25,12 +25,28 @@ module.exports = class Employee {
 	}
 
 	GET(req, res) {
+		var me = this;
 		console.log("GET")
+		var orderRow = this.mongo.getModel('OrderRow');
+		var order = this.mongo.getModel('Order');
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
+			}
+			if(method === 'findById') {
+				orderRow.find( { employees: data._id }, function(err, result) {
+
+					order.find( { orderRows: result._id }, function(err, result) {
+						
+						res.json(result);
+
+					});
+					return;
+				});
+	
+				return;
 			}
 			res.json(data);
 		});
