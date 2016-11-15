@@ -38,6 +38,14 @@ module.exports = class Order {
 	}
 	GET(req, res) {
 
+		if(req.params.id === 'active') {
+			this.order.find({ status: 'active'}, function(err, data) {
+				if(err) {
+					res.json(err);
+				}
+				res.json(data);
+			});
+		}
 		var query = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
 
