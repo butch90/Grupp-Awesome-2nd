@@ -12,7 +12,7 @@ module.exports = class Part {
 
     router() {
     var me = this;
-        this.app.all(this.settings.route, function(req, res) {
+        this.app.all(me.settings.route, function(req, res) {
             if (!me[req.method]) {
                 res.sendStatus(404);
                 res.end();
@@ -30,7 +30,7 @@ module.exports = class Part {
 
         var partId = req.params.id ? req.params.id : {};
 
-        this.models[method](partId, part, function(err, result) {
+        this.models[method](partId, function(err, result) {
           if (err) { console.log(err.stack); }
           res.json(result);
         });
