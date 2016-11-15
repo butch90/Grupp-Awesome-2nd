@@ -8,6 +8,7 @@
     "express": "*",
     "express-session": "*",
     "mongoose": "*",
-    "mysql": "^2.12.0"
+    "compression": "*",
+    "mysql": "*"
   }
 }
