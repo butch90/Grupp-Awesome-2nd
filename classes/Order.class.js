@@ -63,11 +63,19 @@ module.exports = class Order {
 				}
 					if(query == 'findById'){
 					me.order.findOne({_id: result._id}).populate(['customer','orderRows']).exec((err, result)=>{
+						result.totalHours = 0;
+						result.orderRows.forEach((x, index)=>{
+							result.totalHours += x.hours;
+							index++;
+							if(index == result.orderRows.length){
+								res.json(result);
+								console.log('totalHours:',result.totalHours)
+							}
+						});
 							if(err){
 								res.json(err.stack);
 								return;
 							}
-						res.json(result);
 					})
 					return;
 				}
