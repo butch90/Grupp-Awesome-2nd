@@ -2,14 +2,15 @@ m = {};
 g = {};
 
 [
-    "express",
-    "express-session",
-    "compression",
-    "path",
-    "fs",
-    "body-parser",
-    "cookie-parser",
-    "mongoose"
+  "express",
+  "express-session",
+  "compression",
+  "path",
+  "fs",
+  "body-parser",
+  "cookie-parser",
+  "mongoose",
+  "mysql"
 ].forEach(function(x){
     m[x.replace(/\W/g,'')] = require(x);
 });
@@ -32,7 +33,9 @@ g.settings = {
     'Employee',
     'OrderRow',
     'Part',
-    'Customer'
+    'REST',
+    'Customer',
+    "MySQL"
   ],
   Login: {
     route: '/bilverkstad/login/:id?'
@@ -45,6 +48,12 @@ g.settings = {
   },
   Part: {
     route: '/bilverkstad/part/:id?'
+  },
+  OrderRow: {
+    route: '/bilverkstad/orderRow/:id?'
+  },
+  REST: {
+    route: '/bilverkstad/:model/:id?'
   },
   Customer: {
     route: '/bilverkstad/customer/:id?'

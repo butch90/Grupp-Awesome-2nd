@@ -20,40 +20,41 @@ module.exports = class Login {
 				return;
 			}
 			me[req.method](req, res);
-			});
-  	}
+		});
+  }
 
 		POST(req, res) {
-		  	console.log("POST")
-		  	var data = req.body || {};
+	  	console.log("POST");
+	  	var data = req.body || {};
 
-		  	if(!data.firstname || !data.birthdate) {
-		  		res.sendStatus(400);
-		  		res.end();
-		  		return;
+	  	if(!data.firstname || !data.birthdate) {
+	  		res.sendStatus(400);
+	  		res.end();
+	  		return;
   	}
 
-  	this.model.findOne(data, (err, result) => {
-  		if(!result){
-  			console.log("error", err.stack);
-  			res.json(true);
-  		} 
-  		req.session.isLoggedIn = result._id;
-  		console.log(result._id);
-  		res.json(true);
-  		})
+	  	this.model.findOne(data, (err, result) => {
+	  		if(!result){
+	  			console.log("error", err.stack);
+	  			res.json(true);
+	  		} 
+	  		req.session.isLoggedIn = result._id;
+	  		req.sessionID = result._id.toString();
+	  		console.log("UserId:", result._id, "is logged in.");
+	  		console.log("current session id:", req.sessionID);
+	  		res.json(true);
+	  	})
   	}
 
 	  GET(req, res) {
-	  	console.log("GET")
+	  	console.log("GET");
 	  	res.json(!!req.session.isLoggedIn);
 	  }
 
 	  DELETE(req, res) {
-	  	console.log("DELETE")
+	  	console.log("DELETE");
 	  	delete req.session.isLoggedIn;
 
 	  	res.json(true);
 	  }
-
 }

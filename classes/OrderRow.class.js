@@ -1,10 +1,7 @@
 module.exports = class OrderRow {
 	constructor(app) {
 		this.app = app;
-
 		this.orderRow = new g.classes.Mongo().getModel('OrderRow');
-
-		console.log(this.orderRow);
 		
 		this.router();
 	}
@@ -28,32 +25,46 @@ module.exports = class OrderRow {
 
 		console.log(req.params);
 
-		this.orderRow[(req.params.id ? 'populate' : 'find')]((req.params.id ? req.params.id : {}),
-		(err, result)=>{
-			(err) && (()=>{me.error(err,res); return;});
+		var test = this.orderRow.find((req.params.id ? {employees: req.params.id} : {}));
+		
+		(req.params.id) && test.populate([{path: 'employees'},{path: 'parts'}]);
+
+		test.exec(function (err, result) {
+			(err) && (()=>{me.ERROR(err,res); return;});
+
+			console.log(result);
+
 			res.json(result);
 		});
-
 	}
 
 	POST(req, res) {
-		var me = this,
-			model = new this.orderRow(req.body);
-
-		model.save((err, result)=>{
-			(err) && (()=>{me.error(err,res); return;});
+		var me = this;
+		new this.orderRow(req.body).save((err, result)=>{
+			(err) && (()=>{me.ERROR(err,res); return;});
 			res.json(result);
 		});
 	}
 
 	DELETE(req, res) {
-		res.send('DELETE');
+		if (!req.params.id) {this.ERROR({error:'Missing id'}, res); return};
+
+		var me = this;
+		this.orderRow.findByIdAndRemove(req.params.id, function(err, result) {
+			(err) && (()=>{me.ERROR(err,res); return;});
+			res.json(true);
+		});
 	}
 
 	PUT(req, res) {
 		this.orderRow.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err,result)=>{
-			(err) && (()=>{me.error(err,res); return;});
+			(err) && (()=>{me.ERROR(err,res); return;});
 			res.json(result);
 		});
+	}
+
+	ERROR(err,res) {
+		res.status(400);
+		res.json(err);
 	}
 }
