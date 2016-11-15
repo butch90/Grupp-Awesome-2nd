@@ -32,10 +32,9 @@ module.exports = class Order {
 				res.json(err.stack);
 			}
 			res.json(data);
-			
 		});
-
 	}
+
 	GET(req, res) {
 
 		if(req.params.id === 'active') {
@@ -48,7 +47,6 @@ module.exports = class Order {
 		}
 		else {
 
-
 			var query = req.params.id ? 'findById' : 'find';
 			var data = req.params.id ? req.params.id : {};
 
@@ -56,10 +54,30 @@ module.exports = class Order {
 				if(err) {
 					res.json(err.stack);
 				}
+
+				if(query == 'findById'){
+				me.order.findOne({_id: result._id}).populate(['customer','orderRows']).exec((err, result)=>{
+					result.totalHours = 0;
+					result.orderRows.forEach((x, index)=>{
+						result.totalHours += x.hours;
+						index++;
+						if(index == result.orderRows.length){
+							res.json(result);
+							console.log('totalHours:',result.totalHours)
+						}
+					});
+						if(err){
+							res.json(err.stack);
+							return;
+						}
+				})
+				return;
+				}
 				res.json(result);
 			});
 		}
 	}
+
 	PUT(req, res) {
 
 		this.order.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
@@ -71,6 +89,7 @@ module.exports = class Order {
 		});
 
 	}
+
 	DELETE(req, res) {
 
 		this.order.findByIdAndRemove(req.params.id, function(err, data) {
