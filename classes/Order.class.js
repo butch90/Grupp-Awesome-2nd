@@ -46,15 +46,19 @@ module.exports = class Order {
 				res.json(data);
 			});
 		}
-		var query = req.params.id ? 'findById' : 'find';
-		var data = req.params.id ? req.params.id : {};
+		else {
 
-		this.order[query](data, function(err, result) {
-			if(err) {
-				res.json(err.stack);
-			}
-			res.json(result);
-		});
+			
+			var query = req.params.id ? 'findById' : 'find';
+			var data = req.params.id ? req.params.id : {};
+
+			this.order[query](data, function(err, result) {
+				if(err) {
+					res.json(err.stack);
+				}
+				res.json(result);
+			});
+		}
 	}
 	PUT(req, res) {
 
