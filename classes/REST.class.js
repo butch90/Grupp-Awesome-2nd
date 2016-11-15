@@ -3,7 +3,7 @@ module.exports = class REST {
 	constructor(express) {
 		this.app = express;
 		this.dataBase  = new g.classes.Mongo();
-
+        this.mySql = new g.classes.MySQL();
 		this.router();
 	}
 	router() {
@@ -18,7 +18,29 @@ module.exports = class REST {
 
 			me[req.method](req, res, model);
 		});
+
+        this.app.all(g.settings.REST.routeSql, function(req, res) {
+            var table = req.params.model;
+            console.log('restSql');
+            if (!me[req.method + '_sql']) {
+                res.sendStatus(404);
+                return;
+            }
+
+            me[req.method + '_sql'](req, res, table);
+        });
 	}
+
+    GET_sql(req, res, table) {
+
+        this.mySql.READ(table, function(err, rows, fields) {
+            if(err) {
+                console.log(err);
+                res.json(err);
+            }
+            res.json(rows);
+        });
+    }
 
 	POST(req, res, model) {
 
@@ -28,7 +50,7 @@ module.exports = class REST {
 				res.json(err.stack);
 			}
 			res.json(data);
-			
+
 		});
 
 	}
