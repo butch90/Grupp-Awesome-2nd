@@ -15,7 +15,7 @@ module.exports = class Order {
 				res.sendStatus(404);
 				return;
 			}
-
+			res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 			me[req.method](req, res);
 		});
 	}
@@ -23,11 +23,6 @@ module.exports = class Order {
 	
 	POST(req, res) {
 		var me = this;
-		/*var newInstance = new this.order(req.body);
-		newInstance.save((err)=>{
-			if(err){console.log("error", err.stack)};
-		})*/
-		
 		this.order.create(req.body, function(err, data) {
 			/*me.order.findOne(data).populate('Customer._id').exec(err, data) => {
 				console.log(true);
@@ -35,14 +30,12 @@ module.exports = class Order {
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);
-				return;
 			}
 			res.json(data);
 		});
 	}
 
 	GET(req, res) {
-		var me = this;
 
 		if(req.params.id === 'active') {
 			this.order.find({ status: 'active'}, function(err, data) {
