@@ -20,6 +20,7 @@ module.exports = class Customer {
 				res.end();
 				return;
 			}
+			res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 			me[req.method](req, res);
 		});
 	}
