@@ -38,6 +38,7 @@ module.exports = class Employee {
 			if(method === 'findById') {
 				orderRow.find( { employees: data._id }, function(err, result) {
 
+
 					result.forEach( function(data, index){
 						order.find( { orderRows: result[index]._id }, function(err, result) {
 
@@ -74,8 +75,8 @@ module.exports = class Employee {
 	DELETE(req, res) {
 		console.log("DELETE")
 		this.model.findByIdAndRemove(req.params.id, req.body, (err, result) => {
-    if(err) console.log("err", err.stack);
-    res.json("deleted");
-  });
+		    if(err) console.log("err", err.stack);
+		    res.json("deleted");
+  		});
 	}
 }
