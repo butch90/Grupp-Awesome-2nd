@@ -32,28 +32,41 @@ module.exports = class Employee {
 		var order = this.mongo.getModel('Order');
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
+
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 			}
-			if(method === 'findById') {
+			if(req.params.vehicles && req.params.id) {
+
+
 				orderRow.find( { employees: data._id }, function(err, result) {
 
+					var response = [];
+					console.log(result);
+					result.forEach( function(data, index) {
+						order.find( { orderRows: result[index]._id }, function(err, r) {
 
-					result.forEach( function(data, index){
-						order.find( { orderRows: result[index]._id }, function(err, result) {
+							// res.json({ 'employee vehicle history' : r });
+							response.push(r);
+							console.log('rseult', r);
 
-							res.json(result);
+							(index+1 == result.length) && callback(response);
 
 						});
-						return;
 					});
+					console.log(response);
 
+					function callback(response){
+						res.json(response);
+					}
 				});
 	
-				return;
 			}
-			res.json(data);
+			else {
+
+				res.json(data);
+			}
 		});
 	}
 
