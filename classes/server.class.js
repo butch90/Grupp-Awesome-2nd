@@ -25,22 +25,22 @@ module.exports = class Server {
 		this.app.use(m.bodyparser.urlencoded({extended: false}));
 		this.app.use(m.expresssession({
 			genid: function(req) {
-	    	if (typeof req.sessionID != 'undefined') return req.sessionID;
-		  },
-	      secret: 'bilverkstad',
-	      resave: false,
-	      saveUninitialized: true
+				if (typeof req.sessionID != 'undefined') return req.sessionID;
+			},
+			secret: 'bilverkstad',
+			resave: false,
+			saveUninitialized: true
 	    }));
 
 		// Mongoose classes
 		new g.classes.OrderRow(this.app);
 		new g.classes.Order(this.app);
 		new g.classes.Employee(this.app);
-        //new g.classes.REST(this.app);
+        new g.classes.REST(this.app);
 	    new g.classes.Part(this.app);
 	    new g.classes.Login(this.app);
 	    new g.classes.Customer(this.app);
-   		//new g.classes.MySQL(this.app);
+   		new g.classes.MySQL(this.app);
 
 		this.app.listen(me.settings.port, function(){
 

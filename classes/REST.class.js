@@ -3,7 +3,7 @@ module.exports = class REST {
 	constructor(express) {
 		this.app = express;
 		this.dataBase  = new g.classes.Mongo();
-        // this.mySql = new g.classes.MySQL();
+        this.mySql = new g.classes.MySQL();
 		this.router();
 	}
 	router() {
@@ -31,29 +31,56 @@ module.exports = class REST {
         });
 	}
 
+
     GET_sql(req, res, table) {
 
-        this.mySql.READ(table, function(err, rows, fields) {
+        this.mySql.READ(req.params.id, table, function(err, rows, fields) {
             if(err) {
                 console.log(err);
                 res.json(err);
+                return;
             }
             res.json(rows);
         });
     }
 
-	POST(req, res, model) {
+	POST_sql(req, res, table) {
 
-		model.create(req.body, function(err, data) {
+		this.mySql.POST(req.body, table, function(err, status) {
 			if(err) {
-				console.log(err.stack);
-				res.json(err.stack);
+				console.log(err);
+				res.json(err);
+                return;
 			}
-			res.json(data);
-
+			res.json(status);
 		});
-
 	}
+
+    PUT_sql(req, res, table) {
+
+        this.mySql.UPDATE(req.params.id, req.body, table, function(err, status) {
+            if(err) {
+                console.log(err);
+                res.json(err);
+                return;
+            }
+            res.json(status);
+        });
+    }
+
+    DELETE_sql(req, res, table) {
+
+        this.mySql.DELETE(req.params.id, table, function(err, status) {
+            if(err) {
+                console.log(err);
+                res.json(err);
+                return;
+            }
+            res.json(status);
+        });
+    }
+
+
 	GET(req, res, model) {
 
 		var query = req.params.id ? 'findById' : 'find';
@@ -66,6 +93,18 @@ module.exports = class REST {
 			res.json(result);
 		});
 	}
+
+    POST(req, res, model) {
+
+        model.create(req.body, function(err, data) {
+            if(err) {
+                console.log(err.stack);
+                res.json(err.stack);
+            }
+            res.json(data);
+        });
+    }
+
 	PUT(req, res, model) {
 
 		model.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
@@ -75,8 +114,8 @@ module.exports = class REST {
 			}
 			res.json(req.body);
 		});
-
 	}
+
 	DELETE(req, res, model) {
 
 		model.findByIdAndRemove(req.params.id, function(err, data) {
@@ -86,7 +125,6 @@ module.exports = class REST {
 			}
 			res.json('Removed');
 		});
-
 	}
 
 }
