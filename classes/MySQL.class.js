@@ -24,10 +24,16 @@ module.exports = class MySQL {
 		});
 	}
 
-	READ(table, callback) {
-		this.connection.query("SELECT * FROM " + table, (err, rows, fields) => {
-            callback(err, rows, fields);
-		});
+	READ(id, table, callback) {
+        if(id){
+            this.connection.query("SELECT * FROM " + table + " WHERE id = ?", id, (err, rows, fields) => {
+                callback(err, rows, fields);
+            });
+        }else{
+    		this.connection.query("SELECT * FROM " + table, (err, rows, fields) => {
+                callback(err, rows, fields);
+    		});
+        }
 	}
 
     POST(data, table, callback) {

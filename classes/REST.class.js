@@ -34,7 +34,7 @@ module.exports = class REST {
 
     GET_sql(req, res, table) {
 
-        this.mySql.READ(table, function(err, rows, fields) {
+        this.mySql.READ(req.params.id, table, function(err, rows, fields) {
             if(err) {
                 console.log(err);
                 res.json(err);
