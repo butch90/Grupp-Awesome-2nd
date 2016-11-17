@@ -11,46 +11,48 @@ for(key in require('./package.json').dependencies){
 var appRoot = m.path.normalize(__dirname +'/');
 
 g.settings = {
-    appRoot: appRoot,
-    modelDir: m.path.join(appRoot, 'schemas/'),
-    Server: {
-        port: 3000,
-        endpoint: '*',
-        webRoot: 'www'
-    },
-    classes: [
-        'Mongo',
-        'Server',
-        'Login',
-        'Order',
-        'Employee',
-        'OrderRow',
-        'Part',
-        'REST',
-        'Customer',
-        "MySQL"
-    ],
-    Login: {
-        route: '/bilverkstad/login/:id?'
-    },
-    Employee: {
-        route: '/bilverkstad/employee/:id?'
-    },
-    Order: {
-        route: '/bilverkstad/order/:id?'
-    },
-    Part: {
-        route: '/bilverkstad/part/:id?'
-    },
-    OrderRow: {
-        route: '/bilverkstad/orderRow/:id?'
-    },
-    REST: {
-        route: '/rest/:model/:id?'
-    },
-    Customer: {
-        route: '/bilverkstad/customer/:id?'
-    }
+  appRoot: appRoot,
+  modelDir: m.path.join(appRoot, 'schemas/'),
+  Server: {
+    port: 3000,
+    endpoint: '*',
+    webRoot: 'www'
+  },
+  classes: [
+    'Mongo',
+    'Server',
+    'Login',
+    'Order',
+    'Employee',
+    'OrderRow',
+    'Part',
+    'REST',
+    'Customer',
+    'MySQL'
+  ],
+  Login: {
+    route: '/bilverkstad/login/:id?'
+  },
+  Employee: {
+    route: '/bilverkstad/employee/:id?'
+  },
+  Order: {
+    route: '/bilverkstad/order/:id?'
+  },
+  Part: {
+    route: '/bilverkstad/part/:id?'
+  },
+  OrderRow: {
+    route: '/bilverkstad/orderRow/:id?'
+  },
+  REST: {
+    route: '/bilverkstad/:model/:id?',
+    routeSql: '/sql/bilverkstad/:model/:id?'
+  },
+  Customer: {
+    route: '/bilverkstad/customer/:id?'
+  }
+>>>>>>> 1474ba9b7c257caa311db7bb5d0465f3d612cf0f
 };
 
 g.classes = {};

@@ -20,17 +20,29 @@ module.exports = class Customer {
 				res.end();
 				return;
 			}
+			res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 			me[req.method](req, res);
 		});
 	}
 
 	GET(req, res) {
+		var me = this;
 		console.log("GET")
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
+			}
+			if(method === 'findById') {
+				me.model.findOne({_id: data._id}).populate('orders').exec((err, result) => {
+					if(err) {
+						res.json(err);
+					}
+					res.json(result);
+					return;
+				});
+				return;
 			}
 			res.json(data);
 		});
