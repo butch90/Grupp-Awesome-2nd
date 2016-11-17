@@ -94,6 +94,17 @@ module.exports = class REST {
 		});
 	}
 
+    POST(req, res, model) {
+
+        model.create(req.body, function(err, data) {
+            if(err) {
+                console.log(err.stack);
+                res.json(err.stack);
+            }
+            res.json(data);
+        });
+    }
+
 	PUT(req, res, model) {
 
 		model.findByIdAndUpdate(req.params.id, req.body, function(err, data) {
