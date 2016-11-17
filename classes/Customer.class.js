@@ -30,9 +30,36 @@ module.exports = class Customer {
 		console.log("GET")
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
+		var order = this.mongo.getModel('Customer');
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
+			}
+			if(req.params.vehicles) {
+				order.find( {'customer': { $in: [req.params.id] }}, function(err, result) {
+				res.json(result);
+
+				console.log(result);
+
+				return;		
+					// result.forEach( function(data, index) {
+					// 	order.find( { orderRows: result[index]._id }, function(err, r) {
+
+					// 		// res.json({ 'employee vehicle history' : r });
+					// 		response.push(r);
+					// 		console.log('rseult', r);
+
+					// 		(index+1 == result.length) && callback(response);
+
+					// 	});
+					// });
+					// console.log(response);
+
+					// function callback(response){
+					// 	res.json(response);
+					// }
+				});
+				return;
 			}
 			if(method === 'findById') {
 				me.model.findOne({_id: data._id}).populate('orders').exec((err, result) => {

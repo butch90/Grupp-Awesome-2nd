@@ -40,7 +40,7 @@ module.exports = class Server {
 	    new g.classes.Part(this.app);
 	    new g.classes.Login(this.app);
 	    new g.classes.Customer(this.app);
-   		new g.classes.MySQL(this.app);
+   		// new g.classes.MySQL(this.app);
 
 		this.app.listen(me.settings.port, function(){
 

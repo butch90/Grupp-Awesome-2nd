@@ -42,24 +42,29 @@ module.exports = class Employee {
 
 				orderRow.find( { employees: data._id }, function(err, result) {
 
-					var response = [];
-					console.log(result);
-					result.forEach( function(data, index) {
-						order.find( { orderRows: result[index]._id }, function(err, r) {
+					console.log(result[0].employees);
+					var resultArray = result.map(function(i){return i.id});
+					console.log('ad', resultArray);
+					order.find( {orderRows: { $in: resultArray }}, function(err, docs) {
+						res.json(docs);
+					})
+					// var response = [];
+					// result.forEach( function(data, index) {
+					// 	order.find( { orderRows: result[index]._id }, function(err, r) {
 
-							// res.json({ 'employee vehicle history' : r });
-							response.push(r);
-							console.log('rseult', r);
+					// 		// res.json({ 'employee vehicle history' : r });
+					// 		response.push(r);
+					// 		console.log('rseult', r);
 
-							(index+1 == result.length) && callback(response);
+					// 		(index+1 == result.length) && callback(response);
 
-						});
-					});
-					console.log(response);
+					// 	});
+					// });
+					// console.log(response);
 
-					function callback(response){
-						res.json(response);
-					}
+					// function callback(response){
+					// 	res.json(response);
+					// }
 				});
 	
 			}

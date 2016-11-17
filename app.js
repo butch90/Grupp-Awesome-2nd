@@ -46,13 +46,12 @@ g.settings = {
     route: '/bilverkstad/orderRow/:id?'
   },
   REST: {
-    route: '/bilverkstad/:model/:id?',
+    route: '/rest/:model/:id?',
     routeSql: '/sql/bilverkstad/:model/:id?'
   },
   Customer: {
-    route: '/bilverkstad/customer/:id?'
+    route: '/bilverkstad/customer/:id?/:vehicles?'
   }
->>>>>>> 1474ba9b7c257caa311db7bb5d0465f3d612cf0f
 };
 
 g.classes = {};
