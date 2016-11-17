@@ -1,4 +1,4 @@
-# Grupp-Awesome-2nd
+# Grupp-Awesome-2nd:octopus:
 
 ## Members  
 Andreas L  
