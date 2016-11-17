@@ -58,7 +58,7 @@ module.exports = class REST {
 
     PUT_sql(req, res, table) {
 
-        this.mySql.UPDATE(req.params.id, table, function(err, status) {
+        this.mySql.UPDATE(req.params.id, req.body, table, function(err, status) {
             if(err) {
                 console.log(err);
                 res.json(err);

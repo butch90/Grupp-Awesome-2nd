@@ -36,8 +36,8 @@ module.exports = class MySQL {
         });
     }
 
-    UPDATE(data, newdata, table, callback) {
-        this.connection.query("UPDATE " + table + " SET ?" + data + " WHERE ?", newdata, (err, status) => {
+    UPDATE(id, data, table, callback) {
+        this.connection.query("UPDATE " + table + " SET ? WHERE ?", [data, id], (err, status) => {
             callback(err, status);
         });
     }
