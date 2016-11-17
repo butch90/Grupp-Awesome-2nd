@@ -30,23 +30,21 @@ module.exports = class MySQL {
 		});
 	}
 
-	UPDATE(){
-		
-		var table = 'insert_table_here';
-		this.connection.query('UPDATE ' + table + 'SET row = ?, row2 = ? WHERE id = ?', [row, row2, id], (err, rows, fields) => {
-			if(!err){
-				console.log('No error');
-			} console.log("error", err.stack);
-		});
-	}
+    POST(data, table, callback) {
+        this.connection.query("INSERT INTO " + table + " SET ?", data, (err, status) => {
+            callback(err, status);
+        });
+    }
 
-	POST(){
-		var data = {}
-		var table = 'insert_table_here';
-		this.connection.query('INSERT INTO' + table + 'SET', data, (err, result) => {
-			if(!err) {
-				console.log(result);
-			}
-		});
-	}
-}
+    UPDATE(data, newdata, table, callback) {
+        this.connection.query("UPDATE " + table + " SET ?" + data + " WHERE ?", newdata, (err, status) => {
+            callback(err, status);
+        });
+    }
+
+    DELETE(id, table, callback) {
+        this.connection.query("DELETE FROM " + table + " WHERE id = ?", id, (err, status) => {
+            callback(err, status);
+        });
+    }
+};
