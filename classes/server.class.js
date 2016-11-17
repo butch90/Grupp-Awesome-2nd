@@ -25,11 +25,11 @@ module.exports = class Server {
 		this.app.use(m.bodyparser.urlencoded({extended: false}));
 		this.app.use(m.expresssession({
 			genid: function(req) {
-	    	if (typeof req.sessionID != 'undefined') return req.sessionID;
-		  },
-	      secret: 'bilverkstad',
-	      resave: false,
-	      saveUninitialized: true
+				if (typeof req.sessionID != 'undefined') return req.sessionID;
+			},
+			secret: 'bilverkstad',
+			resave: false,
+			saveUninitialized: true
 	    }));
 
 		// Mongoose classes

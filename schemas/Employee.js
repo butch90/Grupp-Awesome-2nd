@@ -3,8 +3,8 @@ var Schema = m.mongoose.Schema({
 	lastname: {type: String, required: true},
 	address: {type: String, required: true},
 	phone: {type: String, required: true},
-	email: {type: String, required: true},
-	birthdate: {type: String, required: true},
+	email: {type: String, required: true, unique: true},
+	birthdate: {type: String, required: true, unique: true},
 	vacation: [{
 		from: {type: Date},
 		to: {type: Date}

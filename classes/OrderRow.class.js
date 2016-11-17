@@ -21,18 +21,13 @@ module.exports = class OrderRow {
 	}
 
 	GET(req, res) {
-		var me = this;
-
-		console.log(req.params);
-
-		var test = this.orderRow.find((req.params.id ? {employees: req.params.id} : {}));
+		var me = this,
+			model = this.orderRow.find((req.params.id ? {employees: req.params.id} : {}));
 		
-		(req.params.id) && test.populate([{path: 'employees'},{path: 'parts'}]);
+		(req.params.id) && model.populate([{path: 'employees'},{path: 'parts'}]);
 
-		test.exec(function (err, result) {
+		model.exec((err, result)=>{
 			(err) && (()=>{me.ERROR(err,res); return;});
-
-			console.log(result);
 
 			res.json(result);
 		});
