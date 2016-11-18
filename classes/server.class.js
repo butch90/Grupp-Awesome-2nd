@@ -6,7 +6,7 @@ module.exports = class Server {
 
 		this.app = m.express();
 
-		//this.app.use(m.express.static(g.appRoot + g.webRoot));
+		this.app.use(m.express.static(g.settings.appRoot + this.settings.webRoot));
 
 		this.setup();
 	}
@@ -41,6 +41,7 @@ module.exports = class Server {
 	    new g.classes.Login(this.app);
 	    new g.classes.Customer(this.app);
 	    new g.classes.Mongo(this.app);
+
 		this.app.listen(me.settings.port, function(){
 
 			var date = new Date();
