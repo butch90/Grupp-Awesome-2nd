@@ -6,4 +6,7 @@
 :man: Olle B - MRsquirrle on some commits?  
 :man: Marcus W - some commits made in the name "your name" (home computer :computer:).  
 
+### Start  
+To start, import data from MongoDump folder, and sql_db  
+
 
