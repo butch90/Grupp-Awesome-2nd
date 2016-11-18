@@ -55,9 +55,8 @@ module.exports = class Part {
     }
 
     DELETE(req, res) {
-        var part = req.body;
 
-        this.models.findByIdAndRemove(req.params.id, part, function(err, result) {
+        this.models.findByIdAndRemove(req.params.id, function(err, result) {
           if (err) { console.log(err.stack); }
           res.json(result);
         });
