@@ -47,8 +47,8 @@ module.exports = class Employee {
 					}
 					var resultArray = result.map(function(i){return i.id});
 
-					order.find( {orderRows: { $in: resultArray }}, function(err, docs) {
-						res.json(docs);
+					order.find( {orderRows: { $in: resultArray }}, function(err, result) {
+						res.json(result);
 					});
 
 				});

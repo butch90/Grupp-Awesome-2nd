@@ -34,6 +34,7 @@ g.settings = {
     route: '/bilverkstad/login/:id?'
   },
   Employee: {
+    // define vehicles param to get at list of orders(vehicles) the employee has
     route: '/bilverkstad/employee/:id?/:vehicles?'
   },
   Order: {
@@ -50,6 +51,7 @@ g.settings = {
     routeSql: '/sql/bilverkstad/:model/:id?'
   },
   Customer: {
+    // define vehicles param to get at list of orders(vehicles) the customer has
     route: '/bilverkstad/customer/:id?/:vehicles?'
   }
 };
