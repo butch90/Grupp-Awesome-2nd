@@ -72,6 +72,7 @@ module.exports = class Order {
 							return;
 						}
 					})
+					res.json(result);
 					return;
 				}
 				if(!err) {
@@ -83,12 +84,12 @@ module.exports = class Order {
 	}
 
 	PUT(req, res) {
-		this.order.findByIdAndUpdate(req.params.id, {new: true} ,req.body, function(err, data) {
+		this.order.findByIdAndUpdate(req.params.id ,req.body, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 				console.log(err.stack);
 			}
-			res.json(req.body);
+			res.json(data);
 		});
 	}
 
