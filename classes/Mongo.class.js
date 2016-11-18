@@ -14,7 +14,7 @@ module.exports = class Mongo {
 	connect(){
 		this.mongo.connect("mongodb://127.0.0.1:27017/Bilverkstaden", function(err, db) {
 		  if(!err) {
-		    console.log("Connected");
+		    console.log("MongoDB connected");
 		  } 
 		  else {
 		  	console.log("error", err.stack);
@@ -28,9 +28,11 @@ module.exports = class Mongo {
 	}
 	loadModels() {
 		var models = m.fs.readdirSync(m.path.join(g.settings.appRoot,'schemas/'));
+		var loaded = [];
 		models.forEach(function (file) {
 			require(m.path.join(g.settings.modelDir, file));
-			console.log('models loaded: ', file);
+			loaded.push(file);
 		});
+		console.log('Loaded modules: ' + loaded);
 	}
 }

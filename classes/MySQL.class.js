@@ -11,42 +11,46 @@ module.exports = class MySQL {
 			  //ersätt med eget användarnamn nedan
 			  user     : 'root',
 			  //ersätt med eget password nedan
-			  password : 'alxw',
+			  password : 'marwen',
 			  database : 'bilverkstadsql'
 			});
 
 		this.connection.connect((err) => {
 			if(!err) {
-			  console.log("Database is connected");
-              return;
+			  console.log("MySQL database is connected");
+        return;
 			}
 			console.log("Error connecting database", err);
 		});
 	}
 
-	READ(table, callback) {
-		this.connection.query("SELECT * FROM " + table, (err, rows, fields) => {
-            callback(err, rows, fields);
-		});
+	READ(id, table, callback) {
+    if(id){
+      this.connection.query("SELECT * FROM " + table + " WHERE id = ?", id, (err, rows, fields) => {
+        callback(err, rows, fields);
+      });
+    }else{
+			this.connection.query("SELECT * FROM " + table, (err, rows, fields) => {
+	      callback(err, rows, fields);
+			});
+    }
 	}
 
-	UPDATE(){
-		
-		var table = 'insert_table_here';
-		this.connection.query('UPDATE ' + table + 'SET row = ?, row2 = ? WHERE id = ?', [row, row2, id], (err, rows, fields) => {
-			if(!err){
-				console.log('No error');
-			} console.log("error", err.stack);
-		});
-	}
+    POST(data, table, callback) {
+      this.connection.query("INSERT INTO " + table + " SET ?", data, (err, status) => {
+        callback(err, status);
+      });
+    }
 
-	POST(){
-		var data = {}
-		var table = 'insert_table_here';
-		this.connection.query('INSERT INTO' + table + 'SET', data, (err, result) => {
-			if(!err) {
-				console.log(result);
-			}
-		});
-	}
-}
+    UPDATE(id, data, table, callback) {
+      this.connection.query("UPDATE " + table + " SET ? WHERE id = ?", [data, id], (err, status) => {
+        callback(err, status);
+      });
+    }
+
+    DELETE(id, table, callback) {
+      this.connection.query("DELETE FROM " + table + " WHERE id = ?", id, (err, status) => {
+        callback(err, status);
+      });
+    }
+};

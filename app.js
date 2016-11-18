@@ -1,19 +1,12 @@
-m = {};
+m = {
+    fs: require('fs'),
+    path: require('path')
+};
 g = {};
 
-[
-  "express",
-  "express-session",
-  "compression",
-  "path",
-  "fs",
-  "body-parser",
-  "cookie-parser",
-  "mongoose",
-  "mysql"
-].forEach(function(x){
-    m[x.replace(/\W/g,'')] = require(x);
-});
+for(key in require('./package.json').dependencies){
+    m[key.replace(/\W/g,'')] = require(key);
+}
 
 var appRoot = m.path.normalize(__dirname +'/');
 
@@ -41,7 +34,7 @@ g.settings = {
     route: '/bilverkstad/login/:id?'
   },
   Employee: {
-    route: '/bilverkstad/employee/:id?'
+    route: '/bilverkstad/employee/:id?/:vehicles?'
   },
   Order: {
     route: '/bilverkstad/order/:id?'
@@ -53,11 +46,11 @@ g.settings = {
     route: '/bilverkstad/orderRow/:id?'
   },
   REST: {
-    route: '/bilverkstad/:model/:id?',
+    route: '/rest/:model/:id?',
     routeSql: '/sql/bilverkstad/:model/:id?'
   },
   Customer: {
-    route: '/bilverkstad/customer/:id?'
+    route: '/bilverkstad/customer/:id?/:vehicles?'
   }
 };
 
