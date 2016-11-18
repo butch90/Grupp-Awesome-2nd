@@ -1,4 +1,6 @@
+var connection;
 module.exports = class MySQL {
+	if (connection) { return; }
 	constructor(express){
 		this.app = express;
 		this.mySql = m.mysql;
@@ -18,10 +20,11 @@ module.exports = class MySQL {
 		this.connection.connect((err) => {
 			if(!err) {
 			  console.log("MySQL database is connected");
-        return;
+			} else {
+			console.log("Error connecting database", err.stack);
 			}
-			console.log("Error connecting database", err);
 		});
+		connection = this.connection;
 	}
 
 	READ(id, table, callback) {

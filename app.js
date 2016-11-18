@@ -46,7 +46,7 @@ g.settings = {
     route: '/bilverkstad/orderRow/:id?'
   },
   REST: {
-    route: '/rest/:model/:id?',
+    route: '/rest/:model/:id?',
     routeSql: '/sql/bilverkstad/:model/:id?'
   },
   Customer: {
@@ -58,9 +58,6 @@ g.classes = {};
 g.settings.classes.forEach((x)=>{
     g.classes[x] = require(m.path.join(g.settings.appRoot + 'classes/' + x + '.class.js'));
 });
-
-// Connect to MongoDB
-new g.classes.Mongo();
 
 // Start server
 new g.classes.Server();
