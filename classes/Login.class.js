@@ -32,7 +32,6 @@ module.exports = class Login {
 	  		res.end();
 	  		return;
   		}
-
 	  	this.model.findOne(data, (err, result) => {
 	  		if(!result){
 	  			console.log("error", err.stack);
@@ -45,6 +44,7 @@ module.exports = class Login {
 	  		console.log("current session id:", req.sessionID);
 	  		res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
 	  		res.json(true);
+	  		return;
 	  	})
   	}
 

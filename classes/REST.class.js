@@ -3,7 +3,7 @@ module.exports = class REST {
 	constructor(express) {
 		this.app = express;
 		this.dataBase  = new g.classes.Mongo();
-        // this.mySql = new g.classes.MySQL();
+        this.mySql = new g.classes.MySQL();
 		this.router();
 	}
 	router() {

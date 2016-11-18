@@ -19,14 +19,10 @@ module.exports = class Order {
 			me[req.method](req, res);
 		});
 	}
-
 	
 	POST(req, res) {
 		var me = this;
 		this.order.create(req.body, function(err, data) {
-			/*me.order.findOne(data).populate('Customer._id').exec(err, data) => {
-				console.log(true);
-			}*/
 			if(err) {
 				console.log(err.stack);
 				res.json(err.stack);
@@ -36,7 +32,7 @@ module.exports = class Order {
 	}
 
 	GET(req, res) {
-
+		var me = this;
 		if(req.params.id === 'active' || req.params.id === 'pending' || req.params.id === 'done') {
 			this.order.find({ status: req.params.id }, function(err, data) {
 				if(err) {
@@ -46,7 +42,6 @@ module.exports = class Order {
 			});
 		}
 		else {
-
 			var query = req.params.id ? 'findById' : 'find';
 			var data = req.params.id ? req.params.id : {};
 
@@ -88,7 +83,6 @@ module.exports = class Order {
 	}
 
 	PUT(req, res) {
-
 		this.order.findByIdAndUpdate(req.params.id, {new: true} ,req.body, function(err, data) {
 			if(err) {
 				res.json(err.stack);
@@ -96,11 +90,9 @@ module.exports = class Order {
 			}
 			res.json(req.body);
 		});
-
 	}
 
 	DELETE(req, res) {
-
 		this.order.findByIdAndRemove(req.params.id, function(err, data) {
 			if(err) {
 				res.json(err.stack);
@@ -108,7 +100,5 @@ module.exports = class Order {
 			}
 			res.json('Removed');
 		});
-
 	}
-
 }

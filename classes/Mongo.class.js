@@ -14,7 +14,7 @@ module.exports = class Mongo {
 	connect(){
 		this.mongo.connect("mongodb://127.0.0.1:27017/Bilverkstaden", function(err, db) {
 		  if(!err) {
-		    console.log("Connected");
+		    console.log("MongoDB connected");
 		  } 
 		  else {
 		  	console.log("error", err.stack);
