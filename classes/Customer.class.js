@@ -43,8 +43,6 @@ module.exports = class Customer {
 					}
 					res.json(result);
 
-					console.log(result);
-
 					return;		
 
 				});
