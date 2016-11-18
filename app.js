@@ -43,7 +43,7 @@ g.settings = {
     route: '/bilverkstad/part/:id?'
   },
   OrderRow: {
-    route: '/bilverkstad/orderRow/:id?'
+    route: '/bilverkstad/orderrow/:id?'
   },
   REST: {
     route: '/rest/:model/:id?',
