@@ -1,6 +1,6 @@
 m = {
     fs: require('fs'),
-    path: require('path')
+    path: require('path'),
 };
 g = {};
 
