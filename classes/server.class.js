@@ -23,6 +23,7 @@ module.exports = class Server {
 		this.app.use(m.compression());
 		this.app.use(m.cookieparser());
 		this.app.use(m.bodyparser.urlencoded({extended: false}));
+		this.app.use(m.compression({threshold: 0}));
 		this.app.use(m.expresssession({
 			genid: function(req) {
 				if (typeof req.sessionID != 'undefined') return req.sessionID;
