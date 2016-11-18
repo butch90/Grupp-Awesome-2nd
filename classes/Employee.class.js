@@ -32,27 +32,46 @@ module.exports = class Employee {
 		var order = this.mongo.getModel('Order');
 		var method = req.params.id ? 'findById' : 'find';
 		var data = req.params.id ? req.params.id : {};
+
 		this.model[method](data, function(err, data) {
 			if(err) {
 				res.json(err.stack);
 			}
-			if(method === 'findById') {
+			if(req.params.vehicles && req.params.id) {
+
+
 				orderRow.find( { employees: data._id }, function(err, result) {
 
-					result.forEach( function(data, index){
-						order.find( { orderRows: result[index]._id }, function(err, result) {
+					console.log(result[0].employees);
+					var resultArray = result.map(function(i){return i.id});
+					console.log('ad', resultArray);
+					order.find( {orderRows: { $in: resultArray }}, function(err, docs) {
+						res.json(docs);
+					})
+					// var response = [];
+					// result.forEach( function(data, index) {
+					// 	order.find( { orderRows: result[index]._id }, function(err, r) {
 
-							res.json(result);
+					// 		// res.json({ 'employee vehicle history' : r });
+					// 		response.push(r);
+					// 		console.log('rseult', r);
 
-						});
-						return;
-					});
+					// 		(index+1 == result.length) && callback(response);
 
+					// 	});
+					// });
+					// console.log(response);
+
+					// function callback(response){
+					// 	res.json(response);
+					// }
 				});
 	
-				return;
 			}
-			res.json(data);
+			else {
+
+				res.json(data);
+			}
 		});
 	}
 
@@ -75,8 +94,8 @@ module.exports = class Employee {
 	DELETE(req, res) {
 		console.log("DELETE")
 		this.model.findByIdAndRemove(req.params.id, req.body, (err, result) => {
-    if(err) console.log("err", err.stack);
-    res.json("deleted");
-  });
+		    if(err) console.log("err", err.stack);
+		    res.json("deleted");
+  		});
 	}
 }

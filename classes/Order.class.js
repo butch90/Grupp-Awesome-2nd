@@ -37,8 +37,8 @@ module.exports = class Order {
 
 	GET(req, res) {
 
-		if(req.params.id === 'active') {
-			this.order.find({ status: 'active'}, function(err, data) {
+		if(req.params.id === 'active' || req.params.id === 'pending' || req.params.id === 'done') {
+			this.order.find({ status: req.params.id }, function(err, data) {
 				if(err) {
 					res.json(err);
 				}
@@ -50,14 +50,20 @@ module.exports = class Order {
 			var query = req.params.id ? 'findById' : 'find';
 			var data = req.params.id ? req.params.id : {};
 
+			var me = this;
 			this.order[query](data, function(err, result) {
 				if(err) {
 					res.json(err.stack);
 				}
-				if(query == 'findById'){
+				console.log(result);
+				if(query == 'findById' && result){
 					me.order.findOne({_id: result._id}).populate(['customer','orderRows']).lean().exec((err, result)=>{
+
+						if(!result) {
+							return;
+						}
 						result.totalHours = 0;
-						result.orderRows.forEach((x, index)=>{
+						(result.orderRows) && result.orderRows.forEach((x, index)=>{
 							result.totalHours += x.hours;
 						
 							if(index+1 == result.orderRows.length){
@@ -73,8 +79,10 @@ module.exports = class Order {
 					})
 					return;
 				}
-				res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
-				res.json(result);
+				if(!err) {
+					res.header('X-Client-id', req.sessionID).header('X-username', req.session.xUsername);
+					res.json(result);
+				}
 			});
 		}
 	}
